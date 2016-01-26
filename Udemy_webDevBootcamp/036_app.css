@@ -1,0 +1,53 @@
+/*h1 {
+	color: slategray;
+}
+
+li {
+	color: pink;
+}
+
+h4 {
+	color: bisque;
+}
+
+
+h1 {
+	color: #00FF00;
+}
+
+li {
+	color: #F12BD4;
+}
+
+h4 {
+	color: #0000FF;
+}
+*/
+
+body {
+	background:	url(http://www.wzchutian.com/wp-content/uploads/z/z-wood-grain-kitchen-cabinets-wood-grain-sunglasses-wood-grain-stencil-wood-grain-stickers-wood-grain-ring-wood-grain-rubber-floor-wood-grain-repair-wood-grain-removable-wallpaper-wood-grain-q.jpg);
+	background-repeat: no-repeat;
+	background-size:	cover;
+}
+
+body{
+	background: url(https://images.blogthings.com/thecolorfulpatterntest/pattern-1.png);
+}
+
+body {
+	background: pink;
+}
+
+
+h1 {
+	color: palegreen;
+	border-style: solid;
+
+	border: 1px dashed purple;
+}
+/*
+h4 {
+	background: rgba(255,100,80,.6);
+}*/
+
+

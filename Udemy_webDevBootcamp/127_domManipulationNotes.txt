@@ -1,0 +1,55 @@
+
+
+// lets you see the javacript object "document"
+console.dir(document);
+
+// gets the tag with that id as an JS object
+document.getElementById("id");
+
+// gets all tags with the given class, returns a "node list" (ie can't use forEach())
+document.getElementsByClass("class");
+
+// returns a node list that contains all the tags of a given type
+document.getElementsByTagName("type");
+
+// takes a CSS style slector, only returns one element
+document.querySelector("any CSS selector")
+// ex1: document.querySelector("#highlight")
+// ex2: document.querySelector(".bolded")  only gives first element 
+
+// takes a CSS style selector, returns a node list of all results
+document.querySelectorAll("any CSS selector");
+
+
+
+//Seperation of Concerns ===  don't mess with styling too much in JS leave that to CSS
+
+var tag = documnet.query.....
+
+//Add a class
+tag.classList.add("class");
+
+//Remove a class
+tag.classList.remove("class");
+
+//Toggle a class - S0 gooood!
+tag.classList.toggle("class");
+
+//returns the text of a tag without html
+tag.textContent
+
+//returns the text within a tag with the html intact
+tag.innerHTML
+
+//get the attribute of a tag ie href, src
+tag.getAtrribute("src")
+
+//set a new attribute of a tag
+tag.setAttribute("src", "new-src")
+
+ 
+ //event listener
+ element.addEventListener(type, functionToCall);
+ 
+//MDN Event Reference
+https://developer.mozilla.org/en-US/docs/Web/Events

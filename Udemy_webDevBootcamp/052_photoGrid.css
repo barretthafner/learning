@@ -1,0 +1,16 @@
+img {
+	width: 30%;
+	float: left;
+	margin: 1.66%;
+}
+
+p {
+	font-family: Raleway;
+	margin-left: 1.66%;
+	margin-right: 1.66%;
+	font-weight: 800;
+	font-size: 1.4em;
+	text-transform: uppercase;
+	border-bottom: 2px solid #EEE;
+	padding-bottom: 20px;
+}

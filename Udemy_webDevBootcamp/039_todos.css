@@ -1,0 +1,16 @@
+body {
+	background: lightslategray;
+}
+
+li {
+	background-color: slategray;
+}
+
+#important {
+	background-color: pink;
+	color: yellow;
+}
+
+.highlight {
+	text-decoration: line-through;
+}
