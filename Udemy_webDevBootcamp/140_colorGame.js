@@ -4,33 +4,57 @@
 
 
 
-
+//select DOM objects
 var squares = document.querySelectorAll(".square");
 var colorDisplay = document.querySelector("#colorDisplay");
 var messageDisplay = document.querySelector("#messageDisplay")
 var h1 = document.querySelector("h1");
+var resetButton = document.querySelector("#resetButton");
+var easyButton = document.querySelector("#easyButton");
+var hardButton = document.querySelector("#hardButton");
 
-var colors = generateRandomColorArray(squares.length);
+//initialize colors and select first random color
+var hardMode = true;
+var colors;
+var pickedColor;
+generateNewGame(hardMode);
 
-var pickedColor = pickRandomSquare();
-colorDisplay.textContent = pickedColor;
+// resetButton click listener
+resetButton.addEventListener("click", function(){
+	h1.style.background = "steelblue";
+	this.textContent = "New Colors";
+	messageDisplay.textContent = "";
+	generateNewGame(hardMode);
+});
 
+//easyButton click listener
+easyButton.addEventListener("click", function() {
+	if(hardMode) {
+		this.classList.add("selected");
+		hardButton.classList.remove("selected");
+		hardMode = false;
+		generateNewGame(hardMode);
+	}
+});
+
+//hardButton click listener
+hardButton.addEventListener("click", function() {
+	if (!hardMode) {
+		this.classList.add("selected");
+		easyButton.classList.remove("selected");
+		hardMode = true;
+		generateNewGame(hardMode);
+	}
+});
+
+//add click listeners to squares
 for (var i = 0; i < squares.length; i++) {
-	//add colors to squares
-	squares[i].style.background = colors[i];
-
-	//add click listeners to squares
 	squares[i].addEventListener("click", function(){
-		//get cliked color
 		var clickedColor = this.style.background;
-		
-		//compare clickedColor to pickedColor
-		// console.log(clickedColor+" "+pickedColor)
 		if(clickedColor == pickedColor){
-			messageDisplay.textContent = "Correct";
+			messageDisplay.textContent = "CORRECT!";
 			changeAllToColor(clickedColor);
-			h1.style.background = clickedColor;
-
+			resetButton.textContent = "Play Again?"
 		} else {
 			this.style.background = "#232323";
 			messageDisplay.textContent = "Try Again"
@@ -39,14 +63,40 @@ for (var i = 0; i < squares.length; i++) {
 
 }
 
+
+//generate a new game
+function generateNewGame(isHard) {
+	if (isHard){
+		colors = generateRandomColorArray(squares.length);
+		pickedColor = pickRandomSquare(squares.length);
+		colorDisplay.textContent = pickedColor;
+		for (var i = 0; i < squares.length; i++) {
+			squares[i].style.background = colors[i];
+			squares[i].style.display = "block";
+		}
+	} else {
+		colors = generateRandomColorArray(3);
+		pickedColor = pickRandomSquare(3);
+		colorDisplay.textContent = pickedColor;
+		for (var i = 0; i < squares.length; i++) {
+			if (colors[i]){
+				squares[i].style.background = colors[i];
+			}	else {
+				squares[i].style.display = "none";
+			}//if-else
+		}//for
+	}//if-else
+} //function
+
 function changeAllToColor(color){
 	for (var i = 0; i < squares.length; i++) {
 		squares[i].style.background = color;
-	};
+		h1.style.background = color;
+	}
 }
 
-function pickRandomSquare() {
-	var random = Math.floor(Math.random() * colors.length);
+function pickRandomSquare(num) {
+	var random = Math.floor(Math.random() * num);
 	return colors[random];
 }
 

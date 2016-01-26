@@ -1,7 +1,5 @@
-/*140_colorGame.css*/
-
 body {
-	background: #232323;
+	background-color: #232323;
 	margin: 0;
 	font-family: "Montserrat", "Avenir";
 }
@@ -12,13 +10,13 @@ body {
 	padding-bottom: 30%;
 	float: left;
 	margin: 1.66%;
-	border-radius: 10%;
+	border-radius: 15%;
 	transition: background 0.6s;
 	-webkit-transition: background 0.6s;
 	-moz-transition: background 0.6s;
 }
 
-.container {
+#container {
 	margin: 20px auto;
 	max-width: 600px;
 }
@@ -26,28 +24,33 @@ body {
 h1 {
 	text-align: center;
 	line-height: 1.1;
+	font-weight: normal;
 	color: white;
 	background: steelblue;
 	margin: 0;
-	padding: 20px 0;
-	font-weight: normal;
 	text-transform: uppercase;
+	padding: 20px 0;
 }
 
-#colorDisplay	{
-	font-size: 2em;
+#colorDisplay {
+	font-size: 200%;
+}
+
+#message {
+	display: inline-block;
+	width: 20%;
 }
 
 #stripe {
 	background: white;
 	height: 30px;
 	text-align: center;
-	color: steelblue;
+	color: black;
 }
 
 .selected {
-	background: steelblue;
 	color: white;
+	background: steelblue;
 }
 
 button {
@@ -66,11 +69,6 @@ button {
 }
 
 button:hover {
-	color:white;
+	color: white;
 	background: steelblue;
-}
-
-#messageDisplay {
-	display: inline-block;
-	width: 20%;
 }
