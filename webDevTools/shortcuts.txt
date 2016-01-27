@@ -1,0 +1,32 @@
+
+Sublime and Emmet shortcuts:
+
+	Sublime:
+		http://docs.sublimetext.info/en/latest/
+
+
+	
+	Emmet:
+
+		http://docs.emmet.io/
+		http://docs.emmet.io/cheat-sheet/
+	
+		Rename enclosing tag:
+
+			[Super + Shift + K] on mac //In OSX environment, super key = Command key.
+			[Ctrl + Shift + '] on windows
+
+		Balance (or select between tags)
+
+			Ctrl+Shift+A (for Windows Sublime Text)
+			Ctrl+D (for OS X Sublime Text)
+
+		Wrap slection with abbreviation
+
+			Ctrl+Shift+G (for Windows Sublime Text)
+
+			Hint: Wrap indiviual lines by including * and use $# to place the lines 
+
+		Select All Selected
+
+			Alt+F3 (for Windows)
