@@ -2,6 +2,8 @@
 READ THIS BOOK!
 https://leanpub.com/javascriptallongesix
 
+this one too:
+http://www.davidbaumgold.com/tutorials/command-line/
 
 https://unsplash.com/
 http://uigradients.com/
