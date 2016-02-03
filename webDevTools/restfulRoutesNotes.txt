@@ -1,0 +1,14 @@
+REST = REpresentational State Transfer
+A mapping between HTTP routes and CRUD
+CRUD = Create, Retrieve, Update, Destroy
+
+REST-FUL ROUTES
+
+name        urlencoded          verb        desc.
+===========================================================================
+INDEX       /dogs               GET         Display a list of all dogs
+NEW         /dogs/new           GET         Displays form to make a new dog
+CREATE      /dogs               POST        Adds a new dog to the DB
+SHOW        /dogs/:id           GET         Shows info about one dog
+
+
