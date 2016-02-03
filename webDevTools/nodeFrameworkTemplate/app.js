@@ -1,16 +1,32 @@
-/*  New app.js 
+/*  NewApp 
     Description:
-    Includes: express, ejs, body-parser
+    Includes: express, ejs, body-parser, and mongoose
 */
 
 // Initialize -----------------------------------------
-var express = require("express");
-var bodyParser = require("body-parser");
-var app = express();
+
+var express     = require("express"),
+    app         = express(),
+    bodyParser  = require("body-parser"),
+    mongoose    = require("mongoose");
+
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 
+// Configure Database ---------------------------------
+// Uncomment below to create new database
+
+/*
+mongoose.connect("mongodb://localhost/new_app");
+
+var appSchema = new mongoose.Schema({
+    name: String,
+    description: String,
+});
+
+var AppItem = mongoose.model("AppItem", appSchema);
+*/
 
 // Routes ---------------------------------------------
 
@@ -25,5 +41,5 @@ app.get("*", function(req, res) {
 
 // Listen ---------------------------------------------
 app.listen(process.env.PORT, process.env.IP, function(){
-    console.log("Server running.  Better go catch it!")
+    console.log("The server is running! Better go catch it!");
 });
