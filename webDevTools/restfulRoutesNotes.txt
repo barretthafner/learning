@@ -4,11 +4,13 @@ CRUD = Create, Retrieve, Update, Destroy
 
 REST-FUL ROUTES
 
-name        urlencoded          verb        desc.
-===========================================================================
+name        path                verb        description
+===================================================================================
 INDEX       /dogs               GET         Display a list of all dogs
 NEW         /dogs/new           GET         Displays form to make a new dog
-CREATE      /dogs               POST        Adds a new dog to the DB
-SHOW        /dogs/:id           GET         Shows info about one dog
-
+CREATE      /dogs               POST        Adds a new dog to the DB, the redirect
+SHOW        /dogs/:id           GET         Shows info about a specific dog
+EDIT        /dogs/:id/edit      GET         Show edit from for one dog
+UPDATE      /dogs/:id           PUT         Update a particular dog, then redirect
+DESTROY     /dogs/:id           DELETE      Delete a particular dog, then redirect
 
