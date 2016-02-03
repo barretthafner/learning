@@ -1,0 +1,17 @@
+{
+  "name": "restful_blog_app",
+  "version": "1.0.0",
+  "description": "A Blog app using the RESTful framework and Semantic UI",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Barrett Hafner",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "ejs": "^2.4.1",
+    "express": "^4.13.4",
+    "mongoose": "^4.4.0"
+  }
+}
