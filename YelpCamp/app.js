@@ -1,22 +1,43 @@
 /*  YelpCamp App 
     Description: Made for web development bootcamp with Colt Steele
-    Includes: express, ejs
+    Includes: express, ejs, bodyParser, mongoose
 */
 
 // Initialize -----------------------------------------
-var express = require("express");
-var bodyParser = require("body-parser");
-var app = express();
+var express     = require("express"),
+    app         = express(),
+    bodyParser  = require("body-parser"),
+    mongoose    = require("mongoose");
+
+mongoose.connect("mongodb://localhost/yelp_camp");
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 
-var campgrounds = [
-    {name: "Salmon Creek", image: "https://farm9.staticflickr.com/8579/16706717975_bdc99767d7.jpg"},
-    {name: "Opal Creek", image: "https://farm1.staticflickr.com/189/493046463_841a18169e.jpg"},
-    {name: "Granite Pass", image: "https://farm9.staticflickr.com/8442/7962474612_bf2baf67c0.jpg"},
-    {name: "Mountain Goats Rest", image: "https://farm1.staticflickr.com/60/215827008_6489cd30c3.jpg"},
-];
+// Schema Setup
+var campgroundSchema = new mongoose.Schema({
+    name: String,
+    image: String,
+    description: String
+});
+
+var Campground = mongoose.model("Campground", campgroundSchema);
+
+// Campground.create(
+//     {
+//         name: "Granite Hill",
+//         image: "https://farm1.staticflickr.com/60/215827008_6489cd30c3.jpg",
+//         description: "This is a huge granite hill. No bathrooms and no water. Beautiful granite!",
+//     },
+//     function(err, campground) {
+//         if (err) {
+//             console.log(err);
+//         } else {
+//             console.log("Newly created campground: ");
+//             console.log(campground);
+//         }
+//     }
+// );
 
 // Routes ---------------------------------------------
 
@@ -25,24 +46,51 @@ app.get("/", function(req, res){
     res.render("root");
 });
 
+// INDEX - RESTFUL ROUTE - show all campgrounds
 app.get("/campgrounds", function(req, res) {
-    res.render("campgrounds", {campgrounds: campgrounds});
+    // Get all campgrounds from DB
+    Campground.find({}, function(err, allCampgrounds){
+        if (err) {
+            console.log(err);
+        } else {
+            res.render("index", {campgrounds: allCampgrounds});
+        }
+    });
 });
 
-
-
+// CREATE - RESTFUL ROUTE - add new campground to DB
 app.post("/campgrounds", function(req, res) {
     //get data from form and add to campgrounds array
     var name = req.body.name;
     var image = req.body.image;
-    var newCampground = {name: name, image: image};
-    campgrounds.push(newCampground);
-    //redirect back to campgrounds page
-    res.redirect("/campgrounds");
+    var description = req.body.description;
+    var newCampground = {name: name, image: image, description:description};
+    Campground.create(newCampground, function(err, newlyCreated){
+        if(err) {
+            console.log(err);
+        } else {
+            res.redirect("/campgrounds");
+        }
+    });
+    
 });
 
+// NEW - RESTFUL ROUTE - show form to create new campground
 app.get("/campgrounds/new", function(req, res) {
    res.render("new");
+});
+
+// SHOW - RESTFUL ROUTE - shows more info about one campground
+app.get("/campgrounds/:id", function(req, res){
+    // find the campground with provided ID
+    Campground.findById(req.params.id, function(err, foundCampground){
+        if(err){
+            console.log(err);
+        } else {
+            // render show template with that campground
+            res.render("show", {campground: foundCampground});
+        }
+    });
 });
 
 app.get("*", function(req, res) {
