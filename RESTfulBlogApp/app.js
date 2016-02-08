@@ -78,6 +78,36 @@ app.get("/blogs", function(req, res){
     });
 });
 
+// New ("/blogs/new") route
+app.get("/blogs/new", function(req, res) {
+    res.render("new");
+});
+
+// Create ("/blogs") route
+app.post("/blogs", function(req, res) {
+    //create blog
+    Blog.create(req.body.blog, function(err, newBlog) {
+        if(err){
+            console.log(err);
+            res.render("new");
+        } else {
+            res.redirect("/blogs")
+        }
+    });
+    //redirect
+});
+
+// Show ("/blogs/:id") route
+app.get("/blogs/:id", function(req, res) {
+    Blog.findById(req.params.id, function(err, foundBlog) {
+        if(err){
+            res.redirect("/blogs");
+        } else {
+            res.render("show", {blog: foundBlog});
+        }
+    });
+});
+
 app.get("*", function(req, res) {
     res.send("You're a shinning star! But, unfortunately, your page cannot be found.");
 });
