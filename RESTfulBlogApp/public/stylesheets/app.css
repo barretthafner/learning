@@ -3,15 +3,20 @@
 /*    color: lavender;*/
 /*}*/
 
-i.icon {
-    font-size: 2em;
-}
+
 
 .container.main {
     margin-top: 7.0em;
 }
 
-img {
-    max-height: 200px;
-    display: block;
+#headerIcon {
+    font-size: 2em;
+}
+
+#deleteForm {
+    display: inline;
+}
+
+#updateForm {
+    display: inline;
 }

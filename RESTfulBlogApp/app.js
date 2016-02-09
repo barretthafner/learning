@@ -5,15 +5,19 @@
 
 // Initialize -----------------------------------------
 
-var express     = require("express"),
-    app         = express(),
-    bodyParser  = require("body-parser"),
-    mongoose    = require("mongoose"),
-    faker       = require("faker");
+var express             = require("express"),
+    app                 = express(),
+    bodyParser          = require("body-parser"),
+    methodOverride      = require("method-override"),
+    expressSanitizer    = require("express-sanitizer"),
+    mongoose            = require("mongoose"),
+    faker               = require("faker");
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(methodOverride("_method"));
+app.use(expressSanitizer());
 
 // Configure Database ---------------------------------
 // Uncomment below to create new database
@@ -86,6 +90,8 @@ app.get("/blogs/new", function(req, res) {
 // Create ("/blogs") route
 app.post("/blogs", function(req, res) {
     //create blog
+    //sanitize blog.body
+    req.body.blog.body = req.sanitize(req.body.blog.body);
     Blog.create(req.body.blog, function(err, newBlog) {
         if(err){
             console.log(err);
@@ -108,6 +114,43 @@ app.get("/blogs/:id", function(req, res) {
     });
 });
 
+// Edit ("blogs/:id/edit") route
+app.get("/blogs/:id/edit", function(req, res) {
+    //find the form
+    Blog.findById(req.params.id, function(err, foundBlog) {
+        if(err){
+            res.redirect("/blogs");
+        } else {
+            res.render("edit", {blog: foundBlog});
+        }
+    });
+});
+
+// Update ("blogs/:id") route
+app.put("/blogs/:id", function(req, res) {
+    req.body.blog.body = req.sanitize(req.body.blog.body);
+    Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedBlog){
+       if(err){
+           res.redirect("/blogs");
+       } else {
+           res.redirect("/blogs/" + req.params.id);
+       }
+    });
+});
+
+// Delete ("blogs/:id") route
+app.delete("/blogs/:id", function(req, res) {
+   Blog.findByIdAndRemove(req.params.id, function(err){
+       if(err){
+           res.redirect("/blogs");
+       } else {
+           res.redirect("/blogs");
+       }
+   });
+});
+
+
+// 404 route
 app.get("*", function(req, res) {
     res.send("You're a shinning star! But, unfortunately, your page cannot be found.");
 });
