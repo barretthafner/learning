@@ -14,3 +14,10 @@ EDIT        /dogs/:id/edit      GET         Show edit from for one dog
 UPDATE      /dogs/:id           PUT         Update a particular dog, then redirect
 DESTROY     /dogs/:id           DELETE      Delete a particular dog, then redirect
 
+
+NESTED REST-FUL ROUTES (comments - many to one)
+name        path                    verb        description
+===================================================================================
+INDEX       /dogs/:id/comments/     GET         Shows info page, contains list of all comments
+NEW         /dogs/:id/comments/new  GET         
+CREATE      /dogs/:id/comments/     POST
