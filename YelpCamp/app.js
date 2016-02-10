@@ -4,22 +4,36 @@
 */
 
 // Initialize -----------------------------------------
-var express     = require("express"),
-    app         = express(),
-    bodyParser  = require("body-parser"),
-    mongoose    = require("mongoose"),
-    Campground  = require("./models/campground"),
-    Comment     = require("./models/comment"),
-    seedDb      = require("./seeds");
+var express         = require("express"),
+    app             = express(),
+    bodyParser      = require("body-parser"),
+    mongoose        = require("mongoose"),
+    passport        = require("passport"),
+    LocalStrategy   = require("passport-local"),
+    Campground      = require("./models/campground"),
+    Comment         = require("./models/comment"),
+    User            = require("./models/user"),
+    seedDb          = require("./seeds");
 
 mongoose.connect("mongodb://localhost/yelp_camp");
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended: true}));
 
-
 //seed the DB
 seedDb();
+
+//Passport initilization
+app.use(require("express-session")({
+    secret: "This is a secret for YelpCamp...easily hackable",
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // Routes ---------------------------------------------
 
@@ -114,8 +128,24 @@ app.post("/campgrounds/:id/comments", function(req, res) {
 });
 
 
+// Auth routes
 
+app.get("/register", function(req, res) {
+   res.render("register") ;
+});
 
+app.post("/register", function(req, res) {
+    var newUser = new User({username: req.body.username});
+    User.register(newUser, req.body.password, function(err, user){
+        if(err){
+            console.log(err);
+            return res.render("register");
+        }
+        passport.authenticate("local")(req, res, function(){
+            res.redirect("/campgrounds");
+        });
+    });
+});
 
 
 
@@ -124,6 +154,7 @@ app.post("/campgrounds/:id/comments", function(req, res) {
 app.get("*", function(req, res) {
     res.send("You're a shinning star! But, unfortunately, your page cannot be found.");
 });
+
 
 // Listen ---------------------------------------------
 app.listen(process.env.PORT, process.env.IP, function(){
