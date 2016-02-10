@@ -7,37 +7,19 @@
 var express     = require("express"),
     app         = express(),
     bodyParser  = require("body-parser"),
-    mongoose    = require("mongoose");
+    mongoose    = require("mongoose"),
+    Campground  = require("./models/campground"),
+    Comment     = require("./models/comment"),
+    seedDb      = require("./seeds");
 
 mongoose.connect("mongodb://localhost/yelp_camp");
 app.set("view engine", "ejs");
-app.use(express.static("public"));
+app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended: true}));
 
-// Schema Setup
-var campgroundSchema = new mongoose.Schema({
-    name: String,
-    image: String,
-    description: String
-});
 
-var Campground = mongoose.model("Campground", campgroundSchema);
-
-// Campground.create(
-//     {
-//         name: "Granite Hill",
-//         image: "https://farm1.staticflickr.com/60/215827008_6489cd30c3.jpg",
-//         description: "This is a huge granite hill. No bathrooms and no water. Beautiful granite!",
-//     },
-//     function(err, campground) {
-//         if (err) {
-//             console.log(err);
-//         } else {
-//             console.log("Newly created campground: ");
-//             console.log(campground);
-//         }
-//     }
-// );
+//seed the DB
+seedDb();
 
 // Routes ---------------------------------------------
 
@@ -53,7 +35,7 @@ app.get("/campgrounds", function(req, res) {
         if (err) {
             console.log(err);
         } else {
-            res.render("index", {campgrounds: allCampgrounds});
+            res.render("campgrounds/index", {campgrounds: allCampgrounds});
         }
     });
 });
@@ -77,22 +59,68 @@ app.post("/campgrounds", function(req, res) {
 
 // NEW - RESTFUL ROUTE - show form to create new campground
 app.get("/campgrounds/new", function(req, res) {
-   res.render("new");
+   res.render("campgrounds/new");
 });
 
 // SHOW - RESTFUL ROUTE - shows more info about one campground
 app.get("/campgrounds/:id", function(req, res){
     // find the campground with provided ID
-    Campground.findById(req.params.id, function(err, foundCampground){
+    Campground.findById(req.params.id).populate("comments").exec(function(err, foundCampground){
         if(err){
             console.log(err);
         } else {
+            // console.log(foundCampground);
             // render show template with that campground
-            res.render("show", {campground: foundCampground});
+            res.render("campgrounds/show", {campground: foundCampground});
         }
     });
 });
 
+
+
+// Comments Routes ------------------------------------
+// new route
+app.get("/campgrounds/:id/comments/new", function(req, res) {
+   Campground.findById(req.params.id, function(err, foundCampground){
+       if (err) {
+           console.log(err);
+       } else {
+           res.render("comments/new", {campground: foundCampground});
+       }
+   });
+});
+
+//create route
+app.post("/campgrounds/:id/comments", function(req, res) {
+    //look up campground by id
+    Campground.findById(req.params.id, function(err, foundCampground) {
+        if (err){
+            console.log(err);
+        } else {
+            // create new comment
+            Comment.create(req.body.comment, function(err, comment) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    //add new comment to campground
+                    foundCampground.comments.push(comment);
+                    foundCampground.save();
+                    // redirect
+                    res.redirect("/campgrounds/" + req.params.id);
+                }
+            });
+        }
+    });
+});
+
+
+
+
+
+
+
+
+// 404 response----------------------------------------
 app.get("*", function(req, res) {
     res.send("You're a shinning star! But, unfortunately, your page cannot be found.");
 });
