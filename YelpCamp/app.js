@@ -35,6 +35,11 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+app.use(function(req, res, next){
+    res.locals.currentUser = req.user;
+    next();
+});
+
 // Routes ---------------------------------------------
 
 // Root ("/") route
@@ -93,8 +98,8 @@ app.get("/campgrounds/:id", function(req, res){
 
 
 // Comments Routes ------------------------------------
-// new route
-app.get("/campgrounds/:id/comments/new", function(req, res) {
+// new comment route
+app.get("/campgrounds/:id/comments/new", isLoggedIn, function(req, res) {
    Campground.findById(req.params.id, function(err, foundCampground){
        if (err) {
            console.log(err);
@@ -104,8 +109,8 @@ app.get("/campgrounds/:id/comments/new", function(req, res) {
    });
 });
 
-//create route
-app.post("/campgrounds/:id/comments", function(req, res) {
+//create comment route
+app.post("/campgrounds/:id/comments", isLoggedIn, function(req, res) {
     //look up campground by id
     Campground.findById(req.params.id, function(err, foundCampground) {
         if (err){
@@ -148,7 +153,23 @@ app.post("/register", function(req, res) {
 });
 
 
+//show login in form
+app.get("/login", function(req, res) {
+    res.render("login");
+});
 
+// handles login logic
+app.post("/login", passport.authenticate("local",
+     {  successRedirect: "/campgrounds",
+        failureRedirect: "/login"
+     }), function(req, res) {
+});
+
+// logout route
+app.get("/logout", function(req, res) {
+    req.logout();
+    res.redirect("/");
+});
 
 // 404 response----------------------------------------
 app.get("*", function(req, res) {
@@ -160,3 +181,12 @@ app.get("*", function(req, res) {
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("Server running.  Better go catch it!")
 });
+
+
+// Middleware -----------------------------------------
+function isLoggedIn(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect("/login");
+}
