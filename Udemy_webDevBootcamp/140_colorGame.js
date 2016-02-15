@@ -17,6 +17,7 @@ var hardButton = document.querySelector("#hardButton");
 var hardMode = true;
 var colors;
 var pickedColor;
+var playing;
 generateNewGame(hardMode);
 
 // resetButton click listener
@@ -24,6 +25,8 @@ resetButton.addEventListener("click", function(){
 	h1.style.background = "steelblue";
 	this.textContent = "New Colors";
 	messageDisplay.textContent = "";
+	easyButton.disabled = false;
+	hardButton.disabled = false;
 	generateNewGame(hardMode);
 });
 
@@ -50,11 +53,18 @@ hardButton.addEventListener("click", function() {
 //add click listeners to squares
 for (var i = 0; i < squares.length; i++) {
 	squares[i].addEventListener("click", function(){
+		if(!playing) {
+			easyButton.disabled = true;
+			hardButton.disabled = true;
+			playing = true;
+		}
 		var clickedColor = this.style.background;
 		if(clickedColor == pickedColor){
 			messageDisplay.textContent = "CORRECT!";
 			changeAllToColor(clickedColor);
 			resetButton.textContent = "Play Again?"
+			easyButton.disabled = false;
+			hardButton.disabled = false;
 		} else {
 			this.style.background = "#232323";
 			messageDisplay.textContent = "Try Again"
@@ -66,6 +76,7 @@ for (var i = 0; i < squares.length; i++) {
 
 //generate a new game
 function generateNewGame(isHard) {
+	playing = false;
 	if (isHard){
 		colors = generateRandomColorArray(squares.length);
 		pickedColor = pickRandomSquare(squares.length);
