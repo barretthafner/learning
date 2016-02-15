@@ -34,28 +34,28 @@ function seedDb() {
        } else {
            console.log("removed campgrounds!");
            //add a few campgrounds
-            data.forEach(function(seed){
-                Campground.create(seed, function(err, camp){
-                    if (err){
-                        console.log(err);
-                    } else {
-                        console.log("added a campground");
-                        //create a comment
-                        Comment.create({
-                            text: "This place is great, but I wish there was WiFi.",
-                            author: "Homer"
-                        }, function(err, comment){
-                           if (err) {
-                               console.log(err);
-                           } else {
-                               camp.comments.push(comment);
-                               camp.save();
-                               console.log("created new comment!");
-                           }
-                        });
-                    }
-                });
-            });
+            // data.forEach(function(seed){
+            //     Campground.create(seed, function(err, camp){
+            //         if (err){
+            //             console.log(err);
+            //         } else {
+            //             console.log("added a campground");
+            //             //create a comment
+            //             Comment.create({
+            //                 text: "This place is great, but I wish there was WiFi.",
+            //                 author: "Homer"
+            //             }, function(err, comment){
+            //               if (err) {
+            //                   console.log(err);
+            //               } else {
+            //                   camp.comments.push(comment);
+            //                   camp.save();
+            //                   console.log("created new comment!");
+            //               }
+            //             });
+            //         }
+            //     });
+            // });
        }
     });
 }
