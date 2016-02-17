@@ -14,9 +14,7 @@ var express         = require("express"),
     flash           = require("connect-flash");
     
 // Require DB Models    
-var User            = require("./models/user"),
-    Campground      = require("./models/campground"),
-    Comment         = require("./models/comment");
+var User            = require("./models/user");
 
 // Require Express Routers
 var indexRoutes         = require("./routes/index"),
@@ -25,7 +23,8 @@ var indexRoutes         = require("./routes/index"),
 
 // Initialize packages
 var app = express();
-mongoose.connect("mongodb://localhost/yelp_camp");
+// mongoose.connect("mongodb://localhost/yelp_camp");
+mongoose.connect("mongodb://salty-meadow:2N8kg5HqRFM2jUCUeh5l@ds011248.mongolab.com:11248/yelpcamp_bh");
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -65,7 +64,5 @@ app.use("/campgrounds/:id/comments", commentRoutes);
 
 // Listen ---------------------------------------------------------------------
 app.listen(process.env.PORT, process.env.IP, function(){
-    console.log("Server running.  Better go catch it!")
+    console.log("Server running.  Better go catch it!");
 });
-
-
