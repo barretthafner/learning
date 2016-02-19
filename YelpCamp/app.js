@@ -11,6 +11,7 @@ var express         = require("express"),
     passport        = require("passport"),
     LocalStrategy   = require("passport-local"),
     methodOverride  = require("method-override"),
+    session         = require("express-session"),
     flash           = require("connect-flash");
     
 // Require DB Models    
@@ -33,7 +34,7 @@ app.use(methodOverride("_method"));
 app.use(flash());
 
 //Express Session initilization for passport
-app.use(require("express-session")({
+app.use(session({
     secret: "This is a secret for YelpCamp...easily hackable",
     resave: false,
     saveUninitialized: false
