@@ -3,43 +3,35 @@
     Includes: express, ejs, body-parser, and mongoose
 */
 
-// Initialize -----------------------------------------
+// Initialize -----------------------------------------------------------------
+// Require Packages
+var express         = require("express"),
+    bodyParser      = require("body-parser"),
+    mongoose        = require("mongoose"),
+    methodOverride  = require("method-override");
 
-var express     = require("express"),
-    app         = express(),
-    bodyParser  = require("body-parser"),
-    mongoose    = require("mongoose");
+// Create app
+var app = express();
 
+// Configure packages
 app.set("view engine", "ejs");
-app.use(express.static(__dirname + "public"));
+app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(methodOverride("_method"));
 
-// Configure Database ---------------------------------
-// Uncomment below to create new database
+// Connect Database -----------------------------------------------------------
+mongoose.connect(process.env.DBURL || "mongodb://localhost/new_app");
 
-/*
-mongoose.connect("mongodb://localhost/new_app");
+// Load models ----------------------------------------------------------------
+app.models = require("./models/index");
 
-var appSchema = new mongoose.Schema({
-    name: String,
-    description: String,
-});
+// Require Routes -------------------------------------------------------------
+var indexRoutes = require("./routes/index");
 
-var AppItem = mongoose.model("AppItem", appSchema);
-*/
+// Use routes -----------------------------------------------------------------
+app.use(indexRoutes);
 
-// Routes ---------------------------------------------
-
-// Root ("/") route
-app.get("/", function(req, res){
-    res.render("root");
-});
-
-app.get("*", function(req, res) {
-    res.send("You're a shinning star! But, unfortunately, your page cannot be found.");
-});
-
-// Listen ---------------------------------------------
+// Listen ---------------------------------------------------------------------
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("The server is running! Better go catch it!");
 });
