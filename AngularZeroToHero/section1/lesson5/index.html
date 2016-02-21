@@ -19,7 +19,9 @@
 
 <div class="container main-content" ng-controller="MinMaxCtrl" >
 
-	<form name="theForm" ng-submit="onSubmit()" >
+	<form 	name="theForm" 
+			ng-submit="onSubmit(theForm.$valid)" 
+			novalidate="novalidate">
 		<div class="form-group" >
 			<label for="name" >Name</label >
 			<input type="text"
@@ -28,15 +30,32 @@
 			       id="name" >
 		</div >
 
-		<div class="form-group" >
+		<div class="form-group" ng-class="
+		{
+			'has-error':!theForm.email.$valid && (!theForm.email.$pristine || theForm.$submitted),
+			'has-success':theForm.email.$valid && (!theForm.email.$pristine || theForm.$submitted)
+		}
+		">
 			<label for="email" >Email</label >
 			<input type="email"
 			       class="form-control"
 			       ng-model="formModel.email"
 			       id="email"
 			       name="email"
-			       required="required" >
+			       required="required">
+			<p class="help-block" ng-show="theForm.email.$error.required && && (!theForm.email.$pristine || theForm.$submitted)">
+				This field is required.
+			</p>
+			<p class="help-block" ng-show="theForm.email.$error.email && && (!theForm.email.$pristine || theForm.$submitted)">
+				Please enter a vailid email.
+			</p>
+			
 		</div >
+		
+		<pre>Email error? {{ theForm.email.$error | json}}</pre>
+		<pre>Field Vaild? {{ theForm.email.$valid }}</pre>
+		<pre>Form Pristine? {{ theForm.$pristine }}</pre>
+		<pre>Form submitted? {{ theForm.$submitted }}</pre>
 
 		<div class="form-group" >
 			<label for="username" >Username</label >
@@ -83,6 +102,8 @@
 	</form >
 
 	<pre>{{ formModel | json }}</pre>
+	<pre>{{ theForm | json }}</pre>
+
 
 </div >
 
