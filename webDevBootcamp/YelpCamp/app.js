@@ -40,7 +40,7 @@ app.use(session({
     saveUninitialized: false
 }));
 
-// Passport initialization
+// Passport configuration
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));

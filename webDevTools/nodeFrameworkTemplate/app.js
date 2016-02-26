@@ -25,10 +25,8 @@ mongoose.connect(process.env.DBURL || "mongodb://localhost/new_app");
 // Load models ----------------------------------------------------------------
 app.models = require("./models/index");
 
-// Require Routes -------------------------------------------------------------
+// Require Routes and use------------------------------------------------------
 var indexRoutes = require("./routes/index");
-
-// Use routes -----------------------------------------------------------------
 app.use(indexRoutes);
 
 // Listen ---------------------------------------------------------------------
