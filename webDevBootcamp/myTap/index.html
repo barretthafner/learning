@@ -185,6 +185,14 @@
 
     var circles = [];
 
+    var text = new PointText({
+        point: [525, 300],
+        content: 'Press a letter key',
+        fillColor: 'slategrey',
+        fontFamily: 'Helvetica',
+        fontWeight: 'bold',
+        fontSize: 25
+    });
 
 
     function onKeyDown(event) {
@@ -220,6 +228,5 @@
 </head>
 <body>
   <canvas id="myCanvas" resize></canvas>
-
 </body>
 </html>
