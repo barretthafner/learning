@@ -1,1 +1,14 @@
-body {}
+@import "normalize";
+@import "bourbon";
+@import "neat";
+
+
+
+body {
+    background: #ccc;
+    font-family: $helvetica;
+}
+
+img {
+    height: 20em;
+}

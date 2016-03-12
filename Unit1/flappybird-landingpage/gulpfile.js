@@ -1,35 +1,36 @@
-var gulp = require('gulp');
-
-var jshint = require('gulp-jshint');
-var sass = require('gulp-sass');
-var imagemin = require('gulp-imagemin');
-var browserify = require('browserify');
-var uglify = require('gulp-uglify');
-var minifyHTML = require('gulp-minify-html');
-var concat = require('gulp-concat');
-var rename = require('gulp-rename');
-var source = require('vinyl-source-stream');
-var buffer = require('vinyl-buffer');
-
-// JavaScript linting task
-gulp.task('jshint', function() {
-  return gulp.src('site/js/*.js')
-    .pipe(jshint())
-    .pipe(jshint.reporter('default'));
-});
-
-// Compile Sass task
-gulp.task('sass', function() {
-  return gulp.src('site/scss/*.scss')
-    .pipe(sass())
-    .pipe(gulp.dest('site/css'));
-});
+var gulp        = require('gulp'),
+    jshint      = require('gulp-jshint'),
+    sass        = require('gulp-sass'),
+    imagemin    = require('gulp-imagemin'),
+    browserify  = require('browserify'),
+    uglify      = require('gulp-uglify'),
+    minifyHTML  = require('gulp-minify-html'),
+    concat      = require('gulp-concat'),
+    rename      = require('gulp-rename'),
+    source      = require('vinyl-source-stream'),
+    buffer      = require('vinyl-buffer'),
+    neat        = require('node-neat'),
+    livereload  = require('gulp-livereload');
+    
+var paths = {
+    index:  './site/index.html',
+    js:     './site/js/*.js',
+    css:    './site/css/*.css',
+    img:    './site/img/*',
+};
 
 // Minify index
 gulp.task('html', function() {
-  return gulp.src('site/index.html')
+  return gulp.src(paths.index)
     .pipe(minifyHTML())
     .pipe(gulp.dest('build/'));
+});
+
+// JavaScript linting task
+gulp.task('jshint', function() {
+  return gulp.src(paths.js)
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
 });
 
 // JavaScript build task, removes whitespace and concatenates all files
@@ -42,28 +43,42 @@ gulp.task('scripts', function() {
     .pipe(gulp.dest('build/js'));
 });
 
+// Compile Sass task
+gulp.task('sass', function() {
+  return gulp.src(paths.scss)
+    .pipe(sass({
+        includePaths: neat.includePaths
+    }))
+    .pipe(gulp.dest('site/css'));
+});
+
 // Styles build task, concatenates all the files
 gulp.task('styles', function() {
-  return gulp.src('site/css/*.css')
+  return gulp.src(paths.css)
     .pipe(concat('styles.css'))
     .pipe(gulp.dest('build/css'));
 });
 
 // Image optimization task
 gulp.task('images', function() {
-  return gulp.src('site/img/*')
+  return gulp.src(paths.img)
     .pipe(imagemin())
     .pipe(gulp.dest('build/img'));
 });
 
 // Watch task
 gulp.task('watch', function() {
-  gulp.watch('site/js/*.js', ['jshint']);
-  gulp.watch('site/scss/*.scss', ['sass']);
+    // livereload.listen({basePath: 'build' });
+    gulp.watch(paths.index, ['html']);
+    gulp.watch(paths.js, ['jshint', 'scripts']);
+    gulp.watch([paths.scss, ], ['sass', 'styles']);
+    gulp.watch(paths.img, ['images']);
+  
 });
-
-// Default task
-gulp.task('default', ['jshint', 'sass', 'watch']);
 
 // Build task
 gulp.task('build', ['jshint', 'sass', 'html', 'scripts', 'styles', 'images']);
+
+// Default task
+gulp.task('default', ['build', 'watch']);
+
