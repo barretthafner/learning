@@ -16,7 +16,8 @@ var paths = {
     index:  './site/index.html',
     js:     './site/js/*.js',
     css:    './site/css/*.css',
-    img:    './site/img/*',
+    scss:   './site/scss*.scss',
+    img:    './site/img/**',
 };
 
 // Minify index
