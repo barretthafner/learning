@@ -3,11 +3,40 @@
 @import "neat";
 
 
-img {
-    height: 20em;
-}
 
 body {
-    background: #ccc;
-    font-family: $helvetica;
+  text-align:center;
+  font-family: 'Roboto', $helvetica;
+  color:black;
+  background-color: #d5d5d5;
+
 }
+
+.container {
+    width: 100%;
+}
+
+header {
+  font-size: 2em;
+  letter-spacing: .1em;
+  word-spacing: .5em;
+  text-transform: uppercase;
+}
+
+.screenshots{
+
+}
+  img {
+      width: 100%;  
+  }
+  
+.socials {
+  font-size: 3em;
+}
+  
+  a, a:visited, a:hover, a:active {
+    color: slategray;
+    padding: 1em;
+  }
+
+

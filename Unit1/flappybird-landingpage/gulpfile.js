@@ -9,14 +9,15 @@ var gulp        = require('gulp'),
     rename      = require('gulp-rename'),
     source      = require('vinyl-source-stream'),
     buffer      = require('vinyl-buffer'),
-    neat        = require('node-neat'),
+    neat        = require('node-neat').includePaths,
+    bourbon     = require('node-bourbon').includePaths,
     livereload  = require('gulp-livereload');
     
 var paths = {
     index:  './site/index.html',
     js:     './site/js/*.js',
     css:    './site/css/*.css',
-    scss:   './site/scss*.scss',
+    scss:   './site/scss/*.scss',
     img:    './site/img/**',
 };
 
@@ -48,7 +49,8 @@ gulp.task('scripts', function() {
 gulp.task('sass', function() {
   return gulp.src(paths.scss)
     .pipe(sass({
-        includePaths: neat.includePaths
+        includePaths: bourbon,
+        includePaths: neat
     }))
     .pipe(gulp.dest('site/css'));
 });
@@ -72,7 +74,8 @@ gulp.task('watch', function() {
     // livereload.listen({basePath: 'build' });
     gulp.watch(paths.index, ['html']);
     gulp.watch(paths.js, ['jshint', 'scripts']);
-    gulp.watch([paths.scss, ], ['sass', 'styles']);
+    gulp.watch(paths.scss, ['sass']);
+    gulp.watch(paths.css, ['styles']);
     gulp.watch(paths.img, ['images']);
   
 });
