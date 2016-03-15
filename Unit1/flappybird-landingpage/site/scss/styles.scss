@@ -2,7 +2,7 @@
 @import "bourbon";
 @import "neat";
 
-
+$color
 
 body {
   text-align:center;
@@ -13,7 +13,7 @@ body {
 }
 
 .container {
-    width: 100%;
+    width: 90%;
 }
 
 header {
@@ -24,19 +24,26 @@ header {
 }
 
 .screenshots{
-
-}
-  img {
-      width: 100%;  
+  .card {
+    border: ;
+    img {
+      width: 100%;
+    }
   }
   
+}
 .socials {
   font-size: 3em;
-}
   
   a, a:visited, a:hover, a:active {
     color: slategray;
     padding: 1em;
   }
+}
+  
+.button {
+  @include button;
+}
 
 
+                  
