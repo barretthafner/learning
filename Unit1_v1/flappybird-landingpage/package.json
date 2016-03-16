@@ -4,7 +4,6 @@
   "description": "The Flappiest Bird",
   "main": "index.js",
   "dependencies": {
-    "gulp": "^3.9.1"
   },
   "devDependencies": {
     "browserify": "^13.0.0",
