@@ -5,17 +5,17 @@
 //iterate through array and write everything greater or equal to five to a new array
 
 
-var input = [1,4,6,8,2,7,13,8,3,4,78,9,3,2,0.-15,2,-1244,35,4,2,-1,0,0];
+var input = [1, 4, 6, 8, 2, 7, 13,  8, 3, 4, 78, 9, 3, 2, 0, -15, 2, -1244, 35, 4, 2, -1, 0, 0];
 
 
 
 var output = [];
 
-input.forEach(function(item) {
+input.forEach(function (item) {
   if (item >= 5) {
     output.push(item);
   }
-})
+});
 
 console.log("arr: " + input);
 console.log("output: " + output);
@@ -47,9 +47,9 @@ tree.insert(54, "nebula");
 tree.insert(1, "minstrel");
 
 
-var third = (function(tree) {
+var third = (function (tree) {
   var largest = tree._findMax();
-  
+
   if (!largest.parent || (!largest.parent.left && !largest.parent.parent)) {
     throw new Error('Tree Not Large Enough!');
   }
@@ -58,7 +58,7 @@ var third = (function(tree) {
   } else {
     return largest.parent.parent;
   }
-})(tree);
+}(tree));
 
 console.log("third largest node: " + third.key);
 
@@ -82,7 +82,7 @@ list1.insert(0, "centerpoint");
 list1.insert(0, "nebula");
 list1.insert(0, "minstrel");
 
-console.log("List Length: " + list1.length + "\n");
+console.log("\nList Length: " + list1.length);
 console.log("Values in order: ");
 
 var node = list1.head;
@@ -91,7 +91,7 @@ for (var i=0; i<list1.length; i++) {
   node = node.next;
 }
 
-list1 = (function (list) {
+var listReversed = (function (list) {
   var tempList = new LL();
   var node = list.head;
   for(var i=0; i<list.length; i++){
@@ -99,17 +99,44 @@ list1 = (function (list) {
     node = node.next;
   }
   return tempList;
-})(list1);
+}(list1));
+
+console.log("\nList Length: " + listReversed.length);
+console.log("Values in reverse: ");
+
+node = listReversed.head;
+for (var i=0; i<listReversed.length; i++) {
+  console.log("\t" + i + ": " + node.value);
+  node = node.next;
+}
+
+console.log("-------------------------------------------------------------------");
+//Reverse a linked list - alternate solution
+// from stack overflow: http://stackoverflow.com/questions/23278017/strategies-to-reverse-a-linked-list-in-javascript
+
+(function reverseLinkedList(list){
+
+  var head = list.head;
+
+  (function reverse(node, previous) {
+    if(node.next !== null){
+      reverse(node.next, node);
+    } else {
+      list.head = node;
+    }
+    node.next = previous;
+  }(head, null));
+
+}(list1));
 
 console.log("List Length: " + list1.length + "\n");
-console.log("Values in order: ");
+console.log("Values in reverse (recursive): ");
 
 var node = list1.head;
 for (var i=0; i<list1.length; i++) {
   console.log("\t" + i + ": " + node.value);
   node = node.next;
 }
-
 
 
 
@@ -132,7 +159,7 @@ list2.insert(0, "hotdog");
 console.log("List Length: " + list2.length + "\n");
 console.log("Values in order: ");
 
-var node = list2.head;
+node = list2.head;
 for (var i=0; i<list2.length; i++) {
   console.log("\t" + i + ": " + node.value);
   node = node.next;
