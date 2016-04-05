@@ -8,11 +8,17 @@ html {
 
 body {
   background-color: LightGray;
+  font-family: Roboto;
   -webkit-font-smoothing: antialiased;
 }
 
 div {
   border: 1px solid Chocolate;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 /* Navigation Section */
@@ -32,7 +38,7 @@ div {
 
 .top-navigation .links {
   float: right;
-  margin: 24px 0 0 0;
+  margin-top: 25px;
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
   color: #838994;
@@ -42,6 +48,7 @@ div {
 
 .top-navigation .links li {
   display: inline-block;
+  margin-left: 25px;
 }
 
 .top-navigation .links > .active {
@@ -51,6 +58,53 @@ div {
 
 .links li:hover {
   color: #4c5058;
-  font-weight: 500;
+  cursor: pointer;
+}
+
+.introduction {
+  background-image: url('/img/first-background.jpg');
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: auto;
+  height: 45.938rem;
+}
+
+.introduction h1, .introduction h3 {
+  color: white;
+  text-align: center;
+  font-weight: 300;
+}
+
+.introduction h1 {
+  margin-top: 17.5rem;
+  font-size: 3.125rem;
+}
+
+.introduction h3 {
+  margin-top: 1.25rem;
+  font-size: 1.563rem;
+}
+
+.introduction .buttons {
+    text-align: center;
+    margin-top: 1.563rem;
+}
+
+button {
+  width: 10rem;
+  background-color: #f15a29;
+  border-color: #f15a29;
+  text-shadow: none;
+  border-style: none;
+  border-radius: 4px;
+  padding: 1rem 1.5rem;
+  color: white;
+  font-size: 1.125rem;
+}
+
+button:hover {
+  background-color: #d9400e;
+  border-color: #cf3d0e;
   cursor: pointer;
 }
