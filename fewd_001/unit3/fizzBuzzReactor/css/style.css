@@ -1,0 +1,52 @@
+/*My normalize rules*/
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+a, a:visited, a:hover, a:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+ol, ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+form {
+  margin: 2rem;
+}
+
+ul {
+  margin: 2rem;
+}
+
+li {
+  font-family: Roboto;
+  display: inline-flex;
+  background: coral;
+  height: 5rem;
+  width: 5rem;
+  border: 2px solid darkblue;
+  color: darkblue;
+  margin: 4px;
+}
+
+li span {
+  width: 100%;
+  text-align: center;
+  margin: auto 0;
+}
+
+li:nth-child(2n) {
+  background: cornflowerblue;
+}
