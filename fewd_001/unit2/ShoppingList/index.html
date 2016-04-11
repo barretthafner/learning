@@ -2,24 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Todo Lister</title>
-  <link href="assets/css/todos.css" rel="stylesheet" type="text/css" >
+  <title>Shopping Lister</title>
+  <link href="assets/css/normalize.css" rel="stylesheet" type="text/css">
   <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700' rel='stylesheet' type='text/css'>
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"  rel="stylesheet" type='text/css'>
-  <script type="text/javascript" src="assets/js/lib/jquery-2.2.0.min.js"></script>
+  <link href="assets/css/main.css" rel="stylesheet" type="text/css">
 </head>
 <body>
   <div id="container">
-    <h1>To-Do List <i class="fa fa-plus"></i></h1>
-    <input id="todoInput" type="text" placeholder="Add New Todo">
+    <div id="heading">
+      <h1>Shopping List</h1>
+      <div id="hide">
+        <i class="fa fa-plus"></i>
+      </div>
+    </div>
+    <input id="listInput" type="text" placeholder="Add New Item">
     <ul>
-      <li><span><i class="fa fa-trash"></i></span> Eat a Burrito</li>
-      <li><span><i class="fa fa-trash"></i></span> Draw a Puppy</li>
-      <li><span><i class="fa fa-trash"></i></span> Go for a walk</li>
-      <li><span><i class="fa fa-trash"></i></span> Work on Jokes</li>
     </ul>
   </div>
 
-<script type="text/javascript" src="assets/js/todos.js"></script>
+  <script type="text/javascript" src="assets/js/lib/jquery-2.2.0.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+
+  <script type="text/javascript" src="assets/js/todos.js"></script>
 </body>
 </html>

@@ -13,22 +13,26 @@ $(document).ready(function(){
       $(this).remove();                        //then remove
     });
     //jQuery method that stops event bubbling to other elements
+    //keeps the li click listener from triggering
     event.stopPropagation();
   });
 
+  // make list sortable
+  $('ul').sortable({ axis: "y" });
+
   //add a new item if "Enter" key is pressed
-  $('#todoInput').on("keypress", function(event){
+  $('#listInput').on("keypress", function(event){
     if (event.which === 13){
       //get input value
       var todoText = $(this).val();
       $(this).val("");
       //create new li and add to ul
-      $('ul').prepend("<li><span><i class='fa fa-trash'></i></span> " + todoText + "</li>");
+      $('ul').prepend("<li class='grabbable'>" + todoText + " <span><i class='fa fa-trash'></i></span></li>");
     }
   });
 
   //hide text input on plus button click
-  $('.fa-plus').on("click", function() {
-    $('#todoInput').fadeToggle();
+  $('#hide').on("click", function() {
+    $('#listInput').fadeToggle();
   });
 });
