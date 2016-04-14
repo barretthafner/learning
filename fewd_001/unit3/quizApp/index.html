@@ -7,12 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.0.0/normalize.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Josefin+Sans:400,600,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/main.css">
   </head>
   <body>
 <!--    Instructions   -->
 <!--
-        Requires the user to anser a number of questions >= 5,
+        Requires the user to answer a number of questions >= 5,
         Questions are answered one at a time (prevent skipping)
         Give the user a way to answer
         Compare the answer to the correct answer
@@ -21,16 +22,35 @@
 
 -->
 
+    <div class="container">
+      <heading>
+        <h1>A quiz</h1>
+      </heading>
+      <section class="question">
+        <h2>Question</h2>
+      </section>
+      <section class="answers">
+        <form>
+          <div class="answer">
+            <input type="radio" name="answer">
+          </div>
+          <div class="answer">
+            <input type="radio" name="answer">
+          </div>
+          <div class="answer">
+            <input type="radio" name="answer">
+          </div>
+          <div class="answer">
+            <input type="radio" name="answer">
+          </div>
 
-    <heading>
+          <div><input type="submit"></div>
+        </form>
+      </section>
+      <footer>
 
-    </heading>
-    <section>
-
-    </section>
-    <footer>
-
-    </footer>
+      </footer>
+    </div>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script src="js/main.js"></script>
   </body>
