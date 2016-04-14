@@ -31,19 +31,21 @@ ul {
 }
 
 li {
+  vertical-align: middle;
   font-family: Roboto;
   display: inline-flex;
   background: coral;
-  height: 5rem;
-  width: 5rem;
+  height: 3rem;
+  width: 3rem;
   border: 2px solid darkblue;
   color: darkblue;
   margin: 4px;
+  text-align: center;
 }
 
 li span {
+  vertical-align: middle;
   width: 100%;
-  text-align: center;
   margin: auto 0;
 }
 
