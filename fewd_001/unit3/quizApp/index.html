@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Document</title>
+    <title>Quiz App</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.0.0/normalize.min.css">
     <link href='https://fonts.googleapis.com/css?family=Josefin+Sans:400,600,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/main.css">
@@ -23,35 +23,42 @@
 -->
 
     <div class="container">
-      <heading>
-        <h1>A quiz</h1>
-      </heading>
-      <section class="question">
-        <h2>Question</h2>
-      </section>
-      <section class="answers">
-        <form>
-          <div class="answer">
-            <input type="radio" name="answer">
-          </div>
-          <div class="answer">
-            <input type="radio" name="answer">
-          </div>
-          <div class="answer">
-            <input type="radio" name="answer">
-          </div>
-          <div class="answer">
-            <input type="radio" name="answer">
-          </div>
+      <div class="quiz-here">
+        <!-- HTML coming soon -->
+      </div>
+      <div class="quiz-here">
+        <!-- HTML coming soon -->
+      </div>
+    </div>
 
-          <div><input type="submit"></div>
+    <script id="quiz-template" type="text/template">
+      <section class="title">
+        <h1 id="quiz-title">#quiz-title</h1>
+      </section>
+      <section class="question" >
+        <h2 id="quiz-question">#quiz-question</h2>
+      </section>
+      <section class="quiz-answer-box">
+          <div class="answer" id="quiz-answer1">
+            <p>#quiz-answer1</p>
+          </div>
+          <div class="answer" id="quiz-answer2">
+            <p>#quiz-answer1</p>
+          </div>
+          <div class="answer" id="quiz-answer3">
+            <p>#quiz-answer1</p>
+          </div>
+          <div class="answer" id="quiz-answer4">
+            <p>#quiz-answer1</p>
+          </div>
+          <button class="submitButton" id="quiz-submit">#quiz-submit</button>
         </form>
       </section>
-      <footer>
+    </script>
 
-      </footer>
-    </div>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="js/quiz.js"></script>
+    <script src="js/quiz1Seed.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>

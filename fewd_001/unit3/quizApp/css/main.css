@@ -1,4 +1,4 @@
-//My normalize rules
+/*My normalize rules*/
 html {
   box-sizing: border-box;
 }
@@ -29,6 +29,52 @@ body {
 
 }
 
-heading {
+.title {
   font-weight: 700;
+  font-size: 1.5rem;
+  text-decoration: underline;
+}
+
+.question {
+  background-color: lightgray;
+  width: 50rem;
+  margin: 0 auto;
+  padding: 1rem;
+  font-size: 1.3rem;
+
+}
+
+.quiz-answer-box {
+  width: 50rem;
+  height: 100%;
+  margin: 1rem auto;
+  padding: 0.1rem 1rem;
+  background-color: lightgray;
+}
+
+.answer {
+  width: 100%;
+  background-color: gray;
+  margin: 1rem auto;
+  padding: 1rem;
+  font-size: 1.2rem;
+}
+
+.answer:hover {
+  cursor: pointer;
+}
+
+.answer p {
+  margin: 0;
+}
+
+.selected {
+  background: darkgray;
+}
+
+.submitButton {
+  display: inherit;
+  margin:  1rem auto;
+  height: 3rem;
+  width: 8rem;
 }
