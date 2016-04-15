@@ -6,15 +6,16 @@ $.fn.quiz = function (options) {
   // define default configurations
   // can we move this out of the this.each???????
   var config = {
-    titleSelector:      '#quiz-title',
-    questionSelector:   '#quiz-question',
-    answerBoxSelector:  '.quiz-answer-box',
-    answer1Selector:    '#quiz-answer1',
-    answer2Selector:    '#quiz-answer2',
-    answer3Selector:    '#quiz-answer3',
-    answer4Selector:    '#quiz-answer4',
-    submitSelector:     '#quiz-submit',
-    templateSelector:   null
+    titleSelector:            '#quiz-title',
+    questionSelector:         '#quiz-question',
+    answerBoxSelector:        '#quiz-answer-box',
+    answer1Selector:          '#quiz-answer1',
+    answer2Selector:          '#quiz-answer2',
+    answer3Selector:          '#quiz-answer3',
+    answer4Selector:          '#quiz-answer4',
+    submitSelector:           '#quiz-submit',
+    questionCounterSelector:  '#quiz-question-counter',
+    templateSelector:          null
 
   };
 
@@ -52,7 +53,7 @@ $.fn.quiz = function (options) {
     buildQuestion(questionNumber);
 
 
-
+    // add click listener to each answer individualy
     $container.find(config.answer1Selector).on("click", function() {
       setSelected(0);
     });
@@ -89,13 +90,17 @@ $.fn.quiz = function (options) {
       // clear selected
       setSelected(-1);
 
-      //write question
+      // write question
       $container.find(config.questionSelector).text(seed.questions[index].question);
 
+      // write answers
       seed.questions[index].answers.forEach(function(item, index) {
         var selector = "answer" + (index + 1) + "Selector";
         $container.find(config[selector]).find("p").text(item);
       })
+
+      // set question counter
+      $container.find(config.questionCounterSelector).text("Question: " + questionNumber + " / " + seed.questions.length );
     }
 
     function setSelected(index) {
