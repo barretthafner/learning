@@ -37,6 +37,7 @@ $.fn.quiz = function (options) {
     var $container = $(this);
     var questionNumber = 0;
     var selected = [false, false, false, false];
+    var score = 0;
 
 
     //apply template if one exists
@@ -48,7 +49,7 @@ $.fn.quiz = function (options) {
     // inject begining state
     $container.find(config.titleSelector).text(seed.title);
     $container.find(config.submitSelector).text("Submit Answer");
-    buildQuestion(0);
+    buildQuestion(questionNumber);
 
 
 
@@ -63,6 +64,14 @@ $.fn.quiz = function (options) {
     });
     $container.find(config.answer4Selector).on("click", function() {
       setSelected(3);
+    });
+
+
+    $container.find(config.submitSelector).on("click", function() {
+      if(checkAnswer()) {
+        questionNumber++;
+        buildQuestion(questionNumber);
+      }
     });
 
 
@@ -103,7 +112,30 @@ $.fn.quiz = function (options) {
         selected[index] = true;
         $container.find(config["answer" + (index + 1) + "Selector"]).addClass("selected");
       }
+    }
 
+    function checkAnswer() {
+      var answer = [];
+
+      // get answer selected
+      selected.forEach(function(item, index) {
+        if (item) {
+          answer.push(index);
+        }
+      });
+
+      // if only one answer
+      if (answer.length === 1){
+        // if correct answer increment score
+        if (answer[0] === seed.questions[questionNumber].correctAnswer) {
+          score++;
+        }
+        // return true
+        return true;
+      }
+
+      //if no answer (or more than one) selected return false
+      return false;
     }
 
 
