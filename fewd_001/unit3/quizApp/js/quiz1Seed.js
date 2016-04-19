@@ -1,5 +1,5 @@
 var quiz1 = {
-  title: "Back to the Future",
+  title: "Back to the Future Quiz",
   questions: [
     {
       question: "What does Doc pack into his suitcase in case they don't have it in the future?",

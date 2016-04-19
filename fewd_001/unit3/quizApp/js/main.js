@@ -1,10 +1,11 @@
 $(document).ready(function() {
 
-  $('.quiz1-here').quiz({
+  $('#quiz1').quiz({
     quizSeed: quiz1,
     templateSelector: '#quiz-template'
   });
-  $('.quiz2-here').quiz({
+
+  $('#quiz2').quiz({
     quizSeed: quiz1,
     templateSelector: '#quiz-template'
   });
