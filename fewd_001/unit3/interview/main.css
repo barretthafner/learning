@@ -1,0 +1,33 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.heading{
+  font-family: Helvetica Neue;
+  font-size: 2rem;
+  background-color:black;
+  background-image:url(https://images.unsplash.com/photo-1451444635319-e5e247fbb88d?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=1080&fit=max&s=704d9fef9d122240e6e467de7755fc5c);
+
+  width:100%;
+  height:500px;
+}
+
+h1{
+  vertical-align: center;
+  text-align:center;
+  color:white;
+  margin: 0;
+  padding: 235px;
+
+}
+.textBlock{
+  width:33.3%;
+  background-color:lightgreen;
+  padding:15px;
+  display:inline-block;
+  margin: 0;
+}
