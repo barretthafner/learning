@@ -30,7 +30,7 @@ body {
   text-decoration: underline;
 }
 
-.quiz-question {
+.quiz-question, .quiz-final-message, .quiz-final-score {
   background-color: lightgray;
   width: 50rem;
   margin: 0 auto;
@@ -72,11 +72,15 @@ body {
   background: darkgray;
 }
 
-.quiz-submit {
+.quiz-submit, .quiz-new {
   display: inline-block;
   margin:  0 auto;
   height: 3rem;
   width: 8rem;
+}
+
+.quiz-new {
+  margin-top: 1rem;
 }
 
 .quiz-question-counter {
@@ -89,7 +93,7 @@ body {
   right: 1rem;
 }
 
-.gameComplete {
+.quiz-complete-view {
 /*  start hidden */
   display: none;
 }

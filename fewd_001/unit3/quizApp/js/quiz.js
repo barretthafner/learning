@@ -26,6 +26,7 @@ $.fn.quiz = function (options) {
     questionCounterSelector:  '.quiz-question-counter',
     completeViewSelector:     '.quiz-complete-view',
     scoreSelector:            '.quiz-final-score',
+    finalMessageSlector:      '.quiz-final-message',
     newQuizSelector:          '.quiz-new'
   };
 
@@ -46,27 +47,24 @@ $.fn.quiz = function (options) {
     // this === an html elment returned from this.each above
     // uses jQuery to access the element and then applies it to a local variable $container
     var $container = $(this);
-    this.initQuiz();
 
-
+    var questionNumber;
+    var selected;
+    var score;
 
     //apply template if one exists
     if (config.templateSelector) {
-      var template = $(config.templateSelector).html();
-      $container.html(template);
+      $container.html($(config.templateSelector).html());
     }
 
-    // inject begining state
-    $container.find(config.titleSelector).text(seed.title);
-    $container.find(config.submitSelector).text("Submit Answer");
-    buildQuestion(questionNumber);
+
+    initQuiz();
 
 
     // add click listener to each answer individualy
     $container.find(config.answerSelector).on("click", function() {
       setSelected($(this).attr('data-answer'));
     });
-
 
 
     $container.find(config.submitSelector).on("click", function() {
@@ -76,91 +74,125 @@ $.fn.quiz = function (options) {
       }
     });
 
+    $container.find(config.newQuizSelector).on("click", function() {
+      initQuiz();
+    })
 
 
-  }); // this.each
+
 
 //  Private functions -------------------------------------------------------------------
 
-  this.prototype.initQuiz = function() {
-    var questionNumber = 0;
-    var selected = [false, false, false, false];
-    var score = 0;
+    function initQuiz() {
 
-  }
+      // reset state variables
+      questionNumber = 0;
+      selected = [false, false, false, false];
+      score = 0;
+      // inject beginning
+      $container.find(config.titleSelector).text(seed.title);
+      buildQuestion(questionNumber);
 
-
-  function buildQuestion(index) {
-    //if no more questions finish game
-    if (index >= seed.questions.length) {
-
-      finishGame();
-      return;
+      $container.find(config.completeViewSelector).hide();
+      $container.find(config.answeringViewSelector).show();
     }
-    // clear selected
-    setSelected(-1);
 
-    // write question
-    $container.find(config.questionSelector).text(seed.questions[index].question);
 
-    // write answers
-    seed.questions[index].answers.forEach(function(item, index) {
-      $container.find("[data-answer='" + index + "']").text(item);
-    })
-
-    // set question counter
-    $container.find(config.questionCounterSelector).text("Question: " + (questionNumber + 1)  + " / " + seed.questions.length );
-  }
-
-  function setSelected(index) {
-
-    // clear selected
-    selected = [false, false, false, false];
-    selected.forEach(function(value, index) {
-      $container.find("[data-answer='" + index + "']").removeClass("selected");
-    });
-
-    // add selected
-    if (index >=0 || index <=3 ) {
-      selected[index] = true;
-      $container.find("[data-answer='" + index + "']").addClass("selected");
-    }
-  }
-
-  function checkAnswer() {
-    var answer = [];
-
-    // get answer selected
-    selected.forEach(function(item, index) {
-      if (item) {
-        answer.push(index);
+    function buildQuestion(index) {
+      //if no more questions finish game
+      if (index >= seed.questions.length) {
+        finishGame();
+        return;
       }
-    });
+      // clear selected
+      setSelected(-1);
 
-    // if only one answer
-    if (answer.length === 1){
-      // if correct answer increment score
-      if (answer[0] === seed.questions[questionNumber].correctAnswer) {
-        score++;
-      }
-      console.log(score);
+      // write question
+      $container.find(config.questionSelector).text(seed.questions[index].question);
 
-      // return true
-      return true;
+      // write answers
+      seed.questions[index].answers.forEach(function(item, index) {
+        $container.find("[data-answer='" + index + "']").text(item);
+      })
+
+      // set question counter
+      $container.find(config.questionCounterSelector).text("Question: " + (questionNumber + 1)  + " / " + seed.questions.length );
     }
-    //if no answer (or more than one) selected return false
-    return false;
-  }
 
-  function finishGame() {
+    function setSelected(index) {
 
-    $container.find(".finishScore").text(score);
+      // clear selected
+      selected = [false, false, false, false];
+      selected.forEach(function(value, index) {
+        $container.find("[data-answer='" + index + "']").removeClass("selected");
+      });
 
-    $container.find(".quiz-answering-view").hide();
-    $container.find(".quiz-complete-view").show();
-  }
+      // add selected
+      if (index >=0 || index <=3 ) {
+        selected[index] = true;
+        $container.find("[data-answer='" + index + "']").addClass("selected");
+      }
+    }
+
+    function checkAnswer() {
+      var answer = [];
+
+      // get answer selected
+      selected.forEach(function(item, index) {
+        if (item) {
+          answer.push(index);
+        }
+      });
+
+      // if only one answer
+      if (answer.length === 1){
+        // if correct answer increment score
+        if (answer[0] === seed.questions[questionNumber].correctAnswer) {
+          score++;
+        }
+        console.log(score);
+
+        // return true
+        return true;
+      }
+      //if no answer (or more than one) selected return false
+      return false;
+    }
+
+    function finishGame() {
+
+      var message = "";
+      switch (score) {
+        case 0:
+          message = "Jesus, George, it was a wonder I was ever born.";
+          break;
+        case 1:
+          message = "That's heavy man...";
+          break;
+        case 2:
+          message = "Hmmm, better check your flux-capacitor.";
+          break;
+        case 3:
+          message = "Where we are going, we don't need roads.";
+          break;
+        case 4:
+          message = "Great Scott!";
+          break;
+        case 5:
+          message = "1.21 GIGAWATTS!!!";
+          break;
+        default:
+          message = "What the hell is a gigawatt?!?"
+      }
+
+      $container.find(config.scoreSelector).text("Your score: " + score + " of " + seed.questions.length);
+      $container.find(config.finalMessageSlector).text(message);
+      $container.find(config.answeringViewSelector).hide();
+      $container.find(config.completeViewSelector).show();
+    }
 
 
+  }); // this.each
 }; // $.fn.quiz
 
 
