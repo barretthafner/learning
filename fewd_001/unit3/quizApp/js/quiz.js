@@ -120,11 +120,10 @@ $.fn.quiz = function (options) {
 
       // get answer selected
       var answer = $container.find('input[name=quiz-answers]:checked').val();
-      console.log(answer === seed.questions[questionNumber].correctAnswer);
 
       // if there is an answer
       if (answer){
-        if (answer == seed.questions[questionNumber].correctAnswer) {
+        if (Number(answer) === seed.questions[questionNumber].correctAnswer) {
           score++;
         }
         // return true

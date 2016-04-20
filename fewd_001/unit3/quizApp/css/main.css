@@ -56,18 +56,16 @@ body {
 }
 
 input[type=radio] {
-  display:none;
+  position: absolute;
+  top: -1000px;
 }
 
-input[type=radio] + label {
-  display:block;
-}
-
-input[type=radio]:checked + label {
+input[type=radio]:checked + div {
   background-color: darkgray;
 }
 
 .quiz-answer {
+  display: block;
   background-color: gray;
   margin: 1rem auto;
   padding: 1rem;
