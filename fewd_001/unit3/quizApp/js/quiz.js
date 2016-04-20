@@ -12,114 +12,96 @@
 // Attach quiz function to jQuery.fn object
 $.fn.quiz = function (options) {
 
-  // define default configurations
-  // can we move this out of the this.each???????
-  var config = {
-    templateSelector:         null,
-    quizSeed:                 null,
-    titleSelector:            '.quiz-title',
-    answeringViewSelector:    '.quiz-answering-view',
-    questionSelector:         '.quiz-question',
-    answerBoxSelector:        '.quiz-answer-box',
-    answerSelector:           '.quiz-answer',
-    submitSelector:           '.quiz-submit',
-    questionCounterSelector:  '.quiz-question-counter',
-    completeViewSelector:     '.quiz-complete-view',
-    scoreSelector:            '.quiz-final-score',
-    finalMessageSlector:      '.quiz-final-message',
-    newQuizSelector:          '.quiz-new'
-  };
-
-  $.extend(config, options);
-
   //if no quizSeed was passed throw and error
-  if(!config.quizSeed) {
+  if(options || !options.quizSeed) {
     throw 'No Quiz Seed!';
   }
-
-  var seed = config.quizSeed;
 
   //  For each jQuery object -------------------------------------------------------------------
 
   // this === jQuery object that contains an array of html elements
-  return this.each(function() {
+  return this.each(function () {
+    new Quiz(this, options);
+  }); // this.each
+  
+  // var quiz = new Quiz(document.getElementById('quiz'), {
+  //    // config
+  //  })
+  //
+  //quiz.finishGame();
+  
+  function Quiz(el, options) {
+    // define default configurations
+    // can we move this out of the this.each???????
 
-    // this === an html elment returned from this.each above
+    $.extend(this.config, options);
+
+    this.seed = this.config.quizSeed;
+    
+    // this === an html element returned from this.each above
     // uses jQuery to access the element and then applies it to a local variable $container
-    var $container = $(this);
-    var questionNumber;
-    var score;
+    this.$container = $(el);
+    this.questionNumber = null;
+    this.score = null;
 
     //apply template if one exists
-    if (config.templateSelector) {
-      $container.html($(config.templateSelector).html());
+    if (this.config.templateSelector) {
+      this.$container.html($(this.config.templateSelector).html());
     }
 
 
-    initQuiz();
+    this.initQuiz();
 
 
-    $container.find(config.submitSelector).on("click", function(event) {
+    this.$container.find(this.config.submitSelector).on("click", function(event) {
       event.preventDefault();
-      if(checkAnswer()) {
-        questionNumber++;
-        buildQuestion(questionNumber);
+      if(this.checkAnswer()) {
+        this.questionNumber++;
+        this.buildQuestion(this.questionNumber);
       }
-    });
+    }.bind(this));
 
-    $container.find(config.newQuizSelector).on("click", function() {
-      initQuiz();
-    })
-
-
-
-
-//  Private functions -------------------------------------------------------------------
-
-    function initQuiz() {
-
+    this.$container.find(this.config.newQuizSelector).on("click", function() {
+      this.initQuiz();
+    }.bind(this));
+    
+    return this;
+  };
+  
+  Quiz.prototype = {
+    
+    config: {
+      templateSelector:         null,
+      quizSeed:                 null,
+      titleSelector:            '.quiz-title',
+      answeringViewSelector:    '.quiz-answering-view',
+      questionSelector:         '.quiz-question',
+      answerBoxSelector:        '.quiz-answer-box',
+      answerSelector:           '.quiz-answer',
+      submitSelector:           '.quiz-submit',
+      questionCounterSelector:  '.quiz-question-counter',
+      completeViewSelector:     '.quiz-complete-view',
+      scoreSelector:            '.quiz-final-score',
+      finalMessageSlector:      '.quiz-final-message',
+      newQuizSelector:          '.quiz-new'
+    },
+    
+    initQuiz: function () {
       // reset state variables
-      questionNumber = 0;
-//      selected = [false, false, false, false];
-      score = 0;
+      this.questionNumber = 0;
+      this.score = 0;
       // inject beginning
-      $container.find(config.titleSelector).text(seed.title);
-      buildQuestion(questionNumber);
+      this.$container.find(config.titleSelector).text(seed.title);
+      this.buildQuestion(this.questionNumber);
+  
+      this.$container.find(config.completeViewSelector).hide();
+      this.$container.find(config.answeringViewSelector).show();
+    },
 
-      $container.find(config.completeViewSelector).hide();
-      $container.find(config.answeringViewSelector).show();
-    }
-
-
-    function buildQuestion(index) {
-      //if no more questions finish game
-      if (index >= seed.questions.length) {
-        finishGame();
-        return;
-      }
-
-      // clear checked
-      $("input:radio").attr("checked", false);
-
-
-      // write question
-      $container.find(config.questionSelector).text(seed.questions[index].question);
-
-      // write answers
-      seed.questions[index].answers.forEach(function(item, index) {
-
-        $container.find("[data-answer='" + index + "']").text(item);
-      })
-
-      // set question counter
-      $container.find(config.questionCounterSelector).text("Question: " + (questionNumber + 1)  + " / " + seed.questions.length );
-    }
-
-
-    function checkAnswer() {
+    checkAnswer: function () {
 
       // get answer selected
-      var answer = $container.find('input[name=quiz-answers]:checked').val();
+      var answer = this.$container.find('input[name=quiz-answers]:checked').val();
 
       // if there is an answer
       if (answer){
@@ -132,9 +114,32 @@ $.fn.quiz = function (options) {
 
       //if no answer (or more than one) selected return false
       return false;
-    }
+    },
+    
+    buildQuestion: function (index) {
+      //if no more questions finish game
+      if (index >= seed.questions.length) {
+        this.finishGame();
+        return;
+      }
 
-    function finishGame() {
+      // clear checked
+      this.$container.find("input:radio").attr("checked", false);
+
+
+      // write question
+      this.$container.find(config.questionSelector).text(seed.questions[index].question);
+
+      // write answers
+      seed.questions[index].answers.forEach(function(item, index) {
+        this.$container.find("[data-answer='" + index + "']").text(item);
+      }.bind(this));
+
+      // set question counter
+      this.$container.find(config.questionCounterSelector).text("Question: " + (questionNumber + 1)  + " / " + seed.questions.length );
+    },
+    
+    finishGame: function () {
 
       var message = "";
       switch (score) {
@@ -160,14 +165,13 @@ $.fn.quiz = function (options) {
           message = "What the hell is a gigawatt?!?"
       }
 
-      $container.find(config.scoreSelector).text("Your score: " + score + " of " + seed.questions.length);
-      $container.find(config.finalMessageSlector).text(message);
-      $container.find(config.answeringViewSelector).hide();
-      $container.find(config.completeViewSelector).show();
+      this.$container.find(config.scoreSelector).text("Your score: " + score + " of " + seed.questions.length);
+      this.$container.find(config.finalMessageSlector).text(message);
+      this.$container.find(config.answeringViewSelector).hide();
+      this.$container.find(config.completeViewSelector).show();
     }
-
-
-  }); // this.each
+    
+  };
 }; // $.fn.quiz
 
 
