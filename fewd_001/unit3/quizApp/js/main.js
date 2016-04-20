@@ -5,9 +5,9 @@ $(document).ready(function() {
     templateSelector: '#quiz-template'
   });
 
-  $('#quiz2').quiz({
-    quizSeed: quiz1,
-    templateSelector: '#quiz-template'
-  });
+//  $('#quiz2').quiz({
+//    quizSeed: quiz1,
+//    templateSelector: '#quiz-template'
+//  });
 
 });

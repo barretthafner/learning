@@ -49,7 +49,7 @@ $.fn.quiz = function (options) {
     var $container = $(this);
 
     var questionNumber;
-    var selected;
+//    var selected;
     var score;
 
     //apply template if one exists
@@ -87,7 +87,7 @@ $.fn.quiz = function (options) {
 
       // reset state variables
       questionNumber = 0;
-      selected = [false, false, false, false];
+//      selected = [false, false, false, false];
       score = 0;
       // inject beginning
       $container.find(config.titleSelector).text(seed.title);
@@ -105,13 +105,14 @@ $.fn.quiz = function (options) {
         return;
       }
       // clear selected
-      setSelected(-1);
+//      setSelected(-1);
 
       // write question
       $container.find(config.questionSelector).text(seed.questions[index].question);
 
       // write answers
       seed.questions[index].answers.forEach(function(item, index) {
+
         $container.find("[data-answer='" + index + "']").text(item);
       })
 
@@ -119,20 +120,20 @@ $.fn.quiz = function (options) {
       $container.find(config.questionCounterSelector).text("Question: " + (questionNumber + 1)  + " / " + seed.questions.length );
     }
 
-    function setSelected(index) {
-
-      // clear selected
-      selected = [false, false, false, false];
-      selected.forEach(function(value, index) {
-        $container.find("[data-answer='" + index + "']").removeClass("selected");
-      });
-
-      // add selected
-      if (index >=0 || index <=3 ) {
-        selected[index] = true;
-        $container.find("[data-answer='" + index + "']").addClass("selected");
-      }
-    }
+//    function setSelected(index) {
+//
+//      // clear selected
+//      selected = [false, false, false, false];
+//      selected.forEach(function(value, index) {
+//        $container.find("[data-answer='" + index + "']").removeClass("selected");
+//      });
+//
+//      // add selected
+//      if (index >=0 || index <=3 ) {
+//        selected[index] = true;
+//        $container.find("[data-answer='" + index + "']").addClass("selected");
+//      }
+//    }
 
     function checkAnswer() {
       var answer = [];
