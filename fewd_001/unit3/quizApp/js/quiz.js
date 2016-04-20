@@ -61,10 +61,10 @@ $.fn.quiz = function (options) {
     initQuiz();
 
 
-    // add click listener to each answer individualy
-    $container.find(config.answerSelector).on("click", function() {
-      setSelected($(this).attr('data-answer'));
-    });
+//    // add click listener to each answer
+//    $container.find(config.answerSelector).on("click", function() {
+//      setSelected($(this).attr('data-answer'));
+//    });
 
 
     $container.find(config.submitSelector).on("click", function() {
@@ -138,12 +138,15 @@ $.fn.quiz = function (options) {
     function checkAnswer() {
       var answer = [];
 
-      // get answer selected
-      selected.forEach(function(item, index) {
-        if (item) {
-          answer.push(index);
-        }
-      });
+//      // get answer selected
+//      selected.forEach(function(item, index) {
+//        if (item) {
+//          answer.push(index);
+//        }
+//      });
+
+      var val = $container.find('input:radio[name=quiz-answers]:checked').val();
+      console.log(val);
 
       // if only one answer
       if (answer.length === 1){
