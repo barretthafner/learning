@@ -47,9 +47,7 @@ $.fn.quiz = function (options) {
     // this === an html elment returned from this.each above
     // uses jQuery to access the element and then applies it to a local variable $container
     var $container = $(this);
-
     var questionNumber;
-//    var selected;
     var score;
 
     //apply template if one exists
@@ -61,13 +59,8 @@ $.fn.quiz = function (options) {
     initQuiz();
 
 
-//    // add click listener to each answer
-//    $container.find(config.answerSelector).on("click", function() {
-//      setSelected($(this).attr('data-answer'));
-//    });
-
-
-    $container.find(config.submitSelector).on("click", function() {
+    $container.find(config.submitSelector).on("click", function(event) {
+      event.preventDefault();
       if(checkAnswer()) {
         questionNumber++;
         buildQuestion(questionNumber);
@@ -104,8 +97,10 @@ $.fn.quiz = function (options) {
         finishGame();
         return;
       }
-      // clear selected
-//      setSelected(-1);
+
+      // clear checked
+      $("input:radio").attr("checked", false);
+
 
       // write question
       $container.find(config.questionSelector).text(seed.questions[index].question);
@@ -120,45 +115,22 @@ $.fn.quiz = function (options) {
       $container.find(config.questionCounterSelector).text("Question: " + (questionNumber + 1)  + " / " + seed.questions.length );
     }
 
-//    function setSelected(index) {
-//
-//      // clear selected
-//      selected = [false, false, false, false];
-//      selected.forEach(function(value, index) {
-//        $container.find("[data-answer='" + index + "']").removeClass("selected");
-//      });
-//
-//      // add selected
-//      if (index >=0 || index <=3 ) {
-//        selected[index] = true;
-//        $container.find("[data-answer='" + index + "']").addClass("selected");
-//      }
-//    }
 
     function checkAnswer() {
-      var answer = [];
 
-//      // get answer selected
-//      selected.forEach(function(item, index) {
-//        if (item) {
-//          answer.push(index);
-//        }
-//      });
+      // get answer selected
+      var answer = $container.find('input[name=quiz-answers]:checked').val();
+      console.log(answer === seed.questions[questionNumber].correctAnswer);
 
-      var val = $container.find('input:radio[name=quiz-answers]:checked').val();
-      console.log(val);
-
-      // if only one answer
-      if (answer.length === 1){
-        // if correct answer increment score
-        if (answer[0] === seed.questions[questionNumber].correctAnswer) {
+      // if there is an answer
+      if (answer){
+        if (answer == seed.questions[questionNumber].correctAnswer) {
           score++;
         }
-        console.log(score);
-
         // return true
         return true;
       }
+
       //if no answer (or more than one) selected return false
       return false;
     }

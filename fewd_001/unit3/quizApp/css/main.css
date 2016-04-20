@@ -68,7 +68,6 @@ input[type=radio]:checked + label {
 }
 
 .quiz-answer {
-  width: 100%;
   background-color: gray;
   margin: 1rem auto;
   padding: 1rem;
@@ -97,13 +96,17 @@ input[type=radio]:checked + label {
 }
 
 .quiz-question-counter {
-  padding: .1rem;
+  padding: .2rem;
+  margin: auto 0;
   display: inline-block;
   height: 2rem;
   background-color: darkgray;
   position: absolute;
   bottom: 1.5rem;
   right: 1rem;
+  line-height: 2rem;
+  font-weight: 700;
+  letter-spacing: .05rem;
 }
 
 .quiz-complete-view {
