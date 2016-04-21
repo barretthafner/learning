@@ -12,8 +12,8 @@ $(document).ready(function(){
 
   var contactsDB = [];
 
-  $('.contact-form button').on('click', function(event) {
-    event.preventDefault();
+  $('.contact-form').on('submit', function(event) {
+//    event.preventDefault();
 
     var contact = {
       id: contactsDB.length,
@@ -32,6 +32,9 @@ $(document).ready(function(){
     };
 
     contactsDB.push(contact);
+    this.reset();
+
+
 
     $('.contact-list').append('<li><a class="contact-link" data-id="' + contact.id + '" href="#">' + contact.firstName + ' ' + contact.lastName + '</a></li>');
 
@@ -41,6 +44,7 @@ $(document).ready(function(){
       showContact($(event.target).attr('data-id'));
     });
 
+    return false;
   });
 
   function showContact(id) {
