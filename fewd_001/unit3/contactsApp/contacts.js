@@ -10,10 +10,9 @@ $(document).ready(function(){
     }
   };
 
-  var contactsDB = [];
+  var contactsDB = window.localStorage.getItem('contactsDB') || [];
 
-  $('.contact-form').on('submit', function(event) {
-//    event.preventDefault();
+  $('.contact-form').on('submit', function() {
 
     var contact = {
       id: contactsDB.length,
@@ -32,6 +31,7 @@ $(document).ready(function(){
     };
 
     contactsDB.push(contact);
+    window.localStorage.setItem('contactsDB', contactsDB);
     this.reset();
 
 
@@ -48,7 +48,16 @@ $(document).ready(function(){
   });
 
   function showContact(id) {
-    var contact = contactsDB[id];
+
+    var contact;
+
+    for (var i = 0; i < contactsDB.length; i++) {
+      if(contactsDB[i].id === Number(id)) {
+        contact = contactsDB[i];
+        break;
+      }
+    }
+
     $(config.selectors.firstName).text(contact.firstName);
     $(config.selectors.lastName).text(contact.lastName);
     contact.phoneNumbers.forEach(function(number, index){
