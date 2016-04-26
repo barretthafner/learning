@@ -1,0 +1,28 @@
+.container {
+  margin: 1rem auto;
+  text-align: center;
+}
+
+.row {
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.thumbnail {
+  padding: 0;
+  text-align: center;
+}
+
+.thumbnail a>img {
+  margin: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+button[data-show=false] {
+  display: none;
+}
+
+button[data-show=true] {
+  display: inherit;
+}
