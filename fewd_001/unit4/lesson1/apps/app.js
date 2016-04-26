@@ -1,8 +1,9 @@
 
 document.addEventListener('DOMContentLoaded', function(){
 
-  document.querySelector('#search-term').addEventListener('submit', function(){
+  document.querySelector('#search-term').addEventListener('submit', function(event){
 
+    event.preventDefault();
     var searchTerm = document.querySelector('#query').value;
     getRequest(searchTerm, 'json');
 
