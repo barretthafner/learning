@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function(){
   var params = {
     responseType: 'json',
     part: 'snippet',
-//    key: '',
+    key: APIkey,
     maxResults: 6,
   };
 
