@@ -82,7 +82,7 @@ function showResults(result, params) {
 
   result.items.forEach(function(item){
     content +=
-      '<div class="col-md-4"><div class="thumbnail"><a href="https://www.youtube.com/watch?v=' + item.id.videoId + '" class="video-link" data-youtube-id="' + item.id.videoId + '"><img src="' + item.snippet.thumbnails.medium.url + '" alt="..."/></a><div class="caption"><h3><a class="video" href="https://www.youtube.com/channel/' + item.snippet.channelId + '">More from this channel</h3></div></div></div>';
+      '<div class="col-md-4"><div class="thumbnail"><a href="https://www.youtube.com/watch?v=' + item.id.videoId + '" data-youtube-id="' + item.id.videoId + '"><img src="' + item.snippet.thumbnails.medium.url + '" alt="..."/></a><div class="caption"><h3><a class="video" href="https://www.youtube.com/channel/' + item.snippet.channelId + '">More from this channel</h3></div></div></div>';
   });
 
   document.querySelector('#search-results').innerHTML = content;
@@ -104,58 +104,3 @@ function showResults(result, params) {
 }
 
 
-function showVideo(youtubeID) {
-  var iframe = '<iframe width="560" height="315" src="https://www.youtube.com/embed/{youtubeID}" frameborder="0" allowfullscreen></iframe>';
-  var overlay = document.querySelector('.overlay');
-  var overlayContent = document.querySelector('.overlay-content');
-  var overlayCloseButton = document.querySelector('.overlay-close');
-  
-  overlayContent.innerHTML = iframe.replace('{youtubeID}', youtubeID);
-  overlay.style.display = 'block';
-  overlayContent.addEventListener('click', hideVideoOnOverlayClick);
-  overlayCloseButton.addEventListener('click', hideVideo);
-  document.addEventListener('keydown', hideVideoOnEsc);
-}
-
-function hideVideo() {
-  var overlay = document.querySelector('.overlay');
-  var overlayContent = document.querySelector('.overlay-content');
-  var overlayCloseButton = document.querySelector('.overlay-close');
-
-  overlay.style.display = 'none';
-  overlayContent.innerHTML = '';
-
-  overlayContent.addEventListener('click', hideVideoOnOverlayClick);
-  overlayCloseButton.removeEventListener('click', hideVideo);
-  document.removeEventListener('keydown', hideVideoOnEsc);
-  
-  console.log('Hide Video');
-}
-
-function hideVideoOnEsc(event) {
-  if (event.keyCode === 27) { // esc key 
-    hideVideo();
-  }
-}
-
-function hideVideoOnOverlayClick(event) {
-  var overlayContent = document.querySelector('.overlay-content');
-  
-  if (event.target === overlayContent) {
-    hideVideo();
-  }
-}
-
-$(document).on('click', '[data-lity]', function () {
-  
-});
-
-document.addEventListener('click', function (event) {
-  debugger;
-  if (event.target.dataset.youtubeId && event.which === 1) {
-    event.preventDefault();
-    showVideo(event.target.dataset.youtubeId);
-  }
-  
-  return true;
-}, true);
