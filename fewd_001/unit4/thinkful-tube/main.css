@@ -11,12 +11,12 @@
 .thumbnail {
   padding: 0;
   text-align: center;
+  overflow: hidden;
 }
 
 .thumbnail a>img {
   margin: 0;
   width: 100%;
-  overflow: hidden;
 }
 
 button[data-show=false] {
