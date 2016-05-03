@@ -64,7 +64,7 @@ function getRequest(url, params){
 
         // if there is a valid response parse the string and send it to showResults
         var result = JSON.parse(xhr.responseText); // 'This is the returned text.'
-        showResults(result, params);
+        showResults(result);
       } else {
         console.log('Error: ' + xhr.status); // An error occurred during the request.
       }
@@ -73,16 +73,20 @@ function getRequest(url, params){
 }
 
 //  -------------------------------------------------------------------
+//  showResutls
+//  pass the results of an api call
+function showResults(result) {
 
-function showResults(result, params) {
+  // set t
   var content = '';
   var nextButton = document.querySelector('#next-button');
   var prevButton = document.querySelector('#prev-button');
 
 
+
   result.items.forEach(function(item){
     content +=
-      '<div class="col-md-4"><div class="thumbnail"><a href="https://www.youtube.com/watch?v=' + item.id.videoId + '" data-youtube-id="' + item.id.videoId + '"><img src="' + item.snippet.thumbnails.medium.url + '" alt="..."/></a><div class="caption"><h3><a class="video" href="https://www.youtube.com/channel/' + item.snippet.channelId + '">More from this channel</h3></div></div></div>';
+      '<div class="col-md-4"><div class="thumbnail"><a href="https://www.youtube.com/watch?v=' + item.id.videoId + '" data-youtube-id="' + item.id.videoId + '"><img src="' + item.snippet.thumbnails.medium.url + '" alt="..."/></a><div class="caption"><h3><a href="https://www.youtube.com/channel/' + item.snippet.channelId + '">More from this channel</h3></div></div></div>';
   });
 
   document.querySelector('#search-results').innerHTML = content;

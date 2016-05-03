@@ -1,3 +1,9 @@
+// litebox
+// next features:
+// use "data-litebox" instead of "data-youtube-id" requires RegEx fun times
+// do other things in litebox: img, html, vimeo
+
+
 ;(function() {
 
   // wait for DOM content to load before you do anything
