@@ -8,12 +8,12 @@ $.fn.todoList = function(options) {
   //   jQueryObject, // $('.todo-list').eq(0)
   //   jQueryObject // $('.todo-list').eq(1)
   // ]
-  
+
   return this.each(function() {
     // Plugin Code
     // this === DOMElement // $('.todo-list')[0]
     var $container = $(this);
-    
+
     var config = {
       titleSelector: '.list-title',
       itemsSelector: '.list-items',
@@ -22,15 +22,15 @@ $.fn.todoList = function(options) {
       onItemAdd: $.noop,
       templateSelector: null
     };
-    
+
     $.extend(config, options);
-    
+
     // Do we need to grab the template first?
     if (config.templateSelector) {
       var template = $(config.templateSelector).html();
       $container.html(template);
     }
-    
+
     // Inject title of list
     $container.find(config.titleSelector).text(config.title);
 
@@ -55,7 +55,7 @@ $.fn.todoList = function(options) {
     //add a new item if "Enter" key is pressed
     $container.find(config.inputSelector).on("keypress", function(event){
       if (event.which === 13){
-        
+
         // Validate event
         $container.trigger('todos.before-item-add', [$(this).val(), function() {
           //get input value
@@ -80,7 +80,7 @@ $.fn.todoList = function(options) {
       $container.find(config.inputSelector).fadeToggle();
     });
   });
-  
+
 };
 
 
@@ -105,5 +105,5 @@ $(document).ready(function(){
     inputTogglerSelector: '.toggle-button',
     templateSelector: '#list-template-todo'
   });
-  
+
 });
