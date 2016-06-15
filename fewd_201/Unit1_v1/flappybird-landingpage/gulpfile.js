@@ -12,7 +12,7 @@ var gulp        = require('gulp'),
     neat        = require('node-neat').includePaths,
     bourbon     = require('node-bourbon').includePaths,
     livereload  = require('gulp-livereload');
-    
+
 var paths = {
     index:  './site/index.html',
     js:     './site/js/*.js',
@@ -77,7 +77,6 @@ gulp.task('watch', function() {
     gulp.watch(paths.scss, ['sass']);
     gulp.watch(paths.css, ['styles']);
     gulp.watch(paths.img, ['images']);
-  
 });
 
 // Build task
