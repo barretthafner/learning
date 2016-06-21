@@ -11,32 +11,31 @@ var Storage = function() {
 Storage.prototype.add = function(name) {
   var item = {name: name, id: this.id};
   this.items.push(item);
-  this.id += 1;
+  this.id++;
   return item;
 };
 
 Storage.prototype.delete = function(id){
   var foundItem = false;
   this.items.forEach(function(item, index, items){
-    if (item.id === id) {
+    if (item.id === Number(id)) {
       foundItem = item;
       items.splice(index, 1);
     }
   });
-  if (foundItem) {
-    this.id--;
-  }
   return foundItem;
 };
 
 Storage.prototype.edit = function(name, id){
   var foundItem = false;
-  this.items.forEach(function(item){
-    if (item.id === id) {
-      item.name = name;
-      foundItem = item;
+  var items = this.items;
+  for(var i = 0; i < items.length; i++) {
+    if (items[i].id === Number(id)) {
+      items[i].name = name;
+      foundItem = items[i];
+      break;
     }
-  });
+  }
   if (!foundItem) {
     foundItem = this.add(name);
   }
@@ -68,16 +67,19 @@ app.post('/items', jsonParser, function(req, res) {
 app.delete('/items/:id', function(req, res) {
   var item = storage.delete(req.params.id);
   if (item) {
-    res.status(410).json(item);
+    res.status(200).json(item);
   } else {
     res.status(404).send("Unable to find item")
   }
 });
 
-app.put('/items/:id',jsonParser, function(req, res) {
-  var item = storage.edit(req.params.id, req.body.name);
-  res.status(201).json(item);
+app.put('/items/:id', jsonParser, function(req, res) {
+  var item = storage.edit(req.body.name, req.params.id);
+  res.status(200).json(item);
 });
 
 
 app.listen(process.env.PORT || 8080);
+
+exports.app = app;
+exports.storage = storage;
