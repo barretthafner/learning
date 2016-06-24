@@ -75,17 +75,17 @@ app.get('/search/:name', function(req, res) {
                if (err) {
                    res.sendStatus(err);
                } else {
-                   output.related = related;
                    
                    var completed = 0;
                    
                    var checkComplete = function() {
                        if (completed === related.length) {
+                           output.related = related;
                            res.json(output);
                        }
                    };
                    
-                   output.related.forEach(function(artist) {
+                   related.forEach(function(artist) {
                        topTracksReq(artist.id, function(err, tracks) {
                            if (err) {
                                res.sendStatus(err);
