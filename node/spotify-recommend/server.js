@@ -2,6 +2,11 @@ var unirest = require('unirest');
 var express = require('express');
 var events = require('events');
 
+
+var app = express();
+app.use(express.static('public'));
+
+
 var getFromApi = function(endpoint, args) {
     var emitter = new events.EventEmitter();
     unirest.get('https://api.spotify.com/v1/' + endpoint)
@@ -17,36 +22,83 @@ var getFromApi = function(endpoint, args) {
     return emitter;
 };
 
-var app = express();
-app.use(express.static('public'));
-
-app.get('/search/:name', function(req, res) {
-    var artistReq = getFromApi('search', {
-        q: req.params.name,
+var artistReq = function(name, cb) {
+    var apiReq = getFromApi('search', {
+        q: name,
         limit: 1,
         type: 'artist'
     });
-
-    artistReq.on('end', function(item) {
-        var artist = item.artists.items[0];
-        var id = item.artists.items[0].id;
-        var relatedReq = getFromApi('artists/' + id + "/related-artists", {
-          id: id
-        });
-        
-        relatedReq.on('end', function(item) {
-            artist.related = item.artists;
-            res.json(artist);
-        });
-        
-        relatedReq.on('error', function(code) {
-          res.sendStatus(code); 
-        });
-
+    
+    apiReq.on("end", function(item){
+        cb(null, item.artists.items[0]);
     });
+    
+    apiReq.on("error", function(code) {
+       cb(code);
+    });
+};
 
-    artistReq.on('error', function(code) {
-        res.sendStatus(code);
+var relatedReq = function(id, cb) {
+  var apiReq = getFromApi('artists/' + id + "/related-artists");
+  
+    apiReq.on("end", function(item){
+        cb(null, item.artists);
+    });
+    
+    apiReq.on("error", function(code) {
+       cb(code);
+    });
+};
+
+var topTracksReq = function(id, cb) {
+    var apiReq = getFromApi('artists/' + id + "/top-tracks", {
+        country: "US"
+    });
+    apiReq.on("end", function(item){
+        cb(null, item.tracks);
+    });
+    
+    apiReq.on("error", function(code) {
+       cb(code);
+    });
+};
+
+
+app.get('/search/:name', function(req, res) {
+    
+    artistReq(req.params.name, function(err, artist) {
+        if (err) {
+            res.sendStatus(err);
+        } else {
+            var output = artist;
+            relatedReq(artist.id, function(err, related) {
+               if (err) {
+                   res.sendStatus(err);
+               } else {
+                   output.related = related;
+                   
+                   var completed = 0;
+                   
+                   var checkComplete = function() {
+                       if (completed === related.length) {
+                           res.json(output);
+                       }
+                   };
+                   
+                   output.related.forEach(function(artist) {
+                       topTracksReq(artist.id, function(err, tracks) {
+                           if (err) {
+                               res.sendStatus(err);
+                           } else {
+                               artist.tracks = tracks;
+                               completed++;
+                               checkComplete();
+                           }
+                       });
+                   });
+                }
+            });
+        }
     });
 });
 
