@@ -1,0 +1,18 @@
+{
+  "name": "assignment1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Barrett Hafner <barrett@hafnerindustries.com>",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^15.2.0",
+    "react-dom": "^15.2.0"
+  },
+  "devDependencies": {
+    "babel-preset-react": "^6.11.1"
+  }
+}
