@@ -70,13 +70,6 @@ const Board = React.createClass({
       lists: this.props.lists || [[]]
     };
   },
-//  addList: function () {
-//    let newLists = this.state.lists;
-//    newLists.push(<List text={text} />);
-//    this.setState({
-//      cards: newCards
-//    });
-//  },
   render: function() {
     const lists = this.state.lists.map(function(cards, index) {
       return (
