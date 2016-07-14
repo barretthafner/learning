@@ -63,32 +63,6 @@ const List = React.createClass({
 });
 
 
-
-//var ListContainer = React.createClass({
-//  getInitialState: function() {
-//    return {
-//      text: null,
-//    };
-//  },
-//  onAddInputChanged: function(inputText) {
-//    this.setState({
-//      text: inputText
-//    });
-//  },
-//  onAddClick: function() {
-//    var newCards = this.state.cards;
-//    newCards.push(this.state.text);
-//    this.setState({
-//      cards: newCards
-//    });
-//  },
-//  render: function() {
-//    return (
-//      <List onAddInputChanged={this.onAddInputChanged} onAddClick={this.onAddClick} cards={this.state.cards} />
-//    )
-//  }
-//});
-
 const Board = React.createClass({
   getInitialState: function () {
     return {
