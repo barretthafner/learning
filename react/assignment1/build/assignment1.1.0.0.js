@@ -128,6 +128,7 @@
 	        });
 	    },
 	    render: function render() {
+	        console.log(this);
 	        var classes = 'person ' + (this.state.highlight ? 'highlight' : '');
 	        return React.createElement(
 	            'div',

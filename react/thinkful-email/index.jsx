@@ -1,7 +1,6 @@
 //var React = require('react'),
 //    ReactDOM = require('react-dom'),
 //    ReactRouter = require('react-router');
-"use strict";
 
 import React from 'react';
 import { render } from 'react-dom';
