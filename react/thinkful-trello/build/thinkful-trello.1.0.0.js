@@ -54,139 +54,16 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
+	var _Board = __webpack_require__(172);
+	
+	var _Board2 = _interopRequireDefault(_Board);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var Card = _react2.default.createClass({
-	  displayName: 'Card',
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'card' },
-	      this.props.text
-	    );
-	  }
-	});
-	
-	var List = _react2.default.createClass({
-	  displayName: 'List',
-	
-	  getInitialState: function getInitialState() {
-	    return {
-	      cards: [],
-	      text: ""
-	    };
-	  },
-	  addCard: function addCard(text) {
-	    var newCards = this.state.cards;
-	    newCards.push(_react2.default.createElement(Card, { text: text }));
-	    this.setState({
-	      cards: newCards
-	    });
-	  },
-	  onAddInputChanged: function onAddInputChanged() {
-	    this.setState({
-	      text: this.refs.input.value
-	    });
-	  },
-	  onAddClick: function onAddClick() {
-	    this.addCard(this.state.text);
-	    this.setState({
-	      text: ""
-	    });
-	  },
-	  render: function render() {
-	    var cards = this.props.cards.map(function (text, index) {
-	      return _react2.default.createElement(
-	        'li',
-	        { key: index },
-	        _react2.default.createElement(Card, { text: text })
-	      );
-	    });
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'list' },
-	      _react2.default.createElement(
-	        'ul',
-	        null,
-	        cards
-	      ),
-	      _react2.default.createElement('input', { type: 'text', ref: 'input', onChange: this.onAddInputChanged }),
-	      _react2.default.createElement(
-	        'button',
-	        { onClick: this.onAddClick },
-	        'Add'
-	      )
-	    );
-	  }
-	});
-	
-	//var ListContainer = React.createClass({
-	//  getInitialState: function() {
-	//    return {
-	//      text: null,
-	//    };
-	//  },
-	//  onAddInputChanged: function(inputText) {
-	//    this.setState({
-	//      text: inputText
-	//    });
-	//  },
-	//  onAddClick: function() {
-	//    var newCards = this.state.cards;
-	//    newCards.push(this.state.text);
-	//    this.setState({
-	//      cards: newCards
-	//    });
-	//  },
-	//  render: function() {
-	//    return (
-	//      <List onAddInputChanged={this.onAddInputChanged} onAddClick={this.onAddClick} cards={this.state.cards} />
-	//    )
-	//  }
-	//});
-	
-	var Board = _react2.default.createClass({
-	  displayName: 'Board',
-	
-	  getInitialState: function getInitialState() {
-	    console.log('bammmmm!', 'initial state');
-	    return {
-	      lists: 2
-	    };
-	  },
-	  componentDidMount: function componentDidMount() {
-	    console.log('bammmmm!', 'board mounted');
-	  },
-	  //  addList: function () {
-	  //    let newLists = this.state.lists;
-	  //    newLists.push(<List text={text} />);
-	  //    this.setState({
-	  //      cards: newCards
-	  //    });
-	  //  },
-	  render: function render() {
-	    console.log(this);
-	    console.log(this.props.lists);
-	    var lists = this.props.lists.map(function (cards, index) {
-	      return _react2.default.createElement(
-	        'li',
-	        { key: index },
-	        _react2.default.createElement(List, { cards: cards })
-	      );
-	    });
-	
-	    return _react2.default.createElement(
-	      'ul',
-	      { className: 'board' },
-	      lists
-	    );
-	  }
-	});
 	
 	var exampleBoard = [["pick up groceries", "build hampsterball", "find meaning of life"], ["start apocalypse", "learn wizard", "talk to bears"], ["fight the power", "leave the party early", "make that sweet baby sing"]];
 	
 	document.addEventListener('DOMContentLoaded', function () {
-	  _reactDom2.default.render(_react2.default.createElement(Board, { lists: exampleBoard }), document.getElementById('app'));
+	  _reactDom2.default.render(_react2.default.createElement(_Board2.default, { lists: exampleBoard }), document.getElementById('app'));
 	});
 
 /***/ },
@@ -21220,6 +21097,174 @@
 	var ReactMount = __webpack_require__(164);
 	
 	module.exports = ReactMount.renderSubtreeIntoContainer;
+
+/***/ },
+/* 172 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _List = __webpack_require__(173);
+	
+	var _List2 = _interopRequireDefault(_List);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Board = _react2.default.createClass({
+	  displayName: 'Board',
+	
+	  getInitialState: function getInitialState() {
+	    return {
+	      // intialized from seed
+	      lists: this.props.lists || [[]]
+	    };
+	  },
+	  render: function render() {
+	    var lists = this.state.lists.map(function (cards, index) {
+	      return _react2.default.createElement(
+	        'li',
+	        { key: index },
+	        _react2.default.createElement(_List2.default, { cards: cards })
+	      );
+	    });
+	
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'board' },
+	      _react2.default.createElement(
+	        'ul',
+	        null,
+	        lists
+	      )
+	    );
+	  }
+	});
+	
+	exports.default = Board;
+
+/***/ },
+/* 173 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Card = __webpack_require__(174);
+	
+	var _Card2 = _interopRequireDefault(_Card);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var List = _react2.default.createClass({
+	  displayName: 'List',
+	
+	  getInitialState: function getInitialState() {
+	    return {
+	      // intialized from seed
+	      cards: this.props.cards || [],
+	      text: ""
+	    };
+	  },
+	  addCard: function addCard() {
+	    var text = this.state.text;
+	    var newCards = this.state.cards;
+	    newCards.push(_react2.default.createElement(_Card2.default, { text: text }));
+	    this.setState({
+	      cards: newCards,
+	      text: ""
+	    });
+	  },
+	  onAddInputChanged: function onAddInputChanged() {
+	    this.setState({
+	      text: this.refs.input.value
+	    });
+	  },
+	  onAddClick: function onAddClick() {
+	    if (this.state.text !== "") {
+	      this.addCard();
+	    }
+	  },
+	  onAddKeyPress: function onAddKeyPress(event) {
+	    var keyCode = event.which;
+	    if (keyCode === 13) {
+	      this.addCard();
+	    }
+	  },
+	  render: function render() {
+	    var cards = this.props.cards.map(function (text, index) {
+	      return _react2.default.createElement(
+	        'li',
+	        { key: index },
+	        _react2.default.createElement(_Card2.default, { text: text })
+	      );
+	    });
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'list' },
+	      _react2.default.createElement(
+	        'ul',
+	        null,
+	        cards
+	      ),
+	      _react2.default.createElement('input', { type: 'text', ref: 'input', onChange: this.onAddInputChanged, onKeyPress: this.onAddKeyPress, value: this.state.text }),
+	      _react2.default.createElement(
+	        'button',
+	        { ref: 'button', onClick: this.onAddClick },
+	        'Add'
+	      )
+	    );
+	  }
+	});
+	
+	exports.default = List;
+
+/***/ },
+/* 174 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Card = _react2.default.createClass({
+	  displayName: "Card",
+	  render: function render() {
+	    return _react2.default.createElement(
+	      "div",
+	      { className: "card" },
+	      _react2.default.createElement(
+	        "p",
+	        null,
+	        this.props.text
+	      )
+	    );
+	  }
+	});
+	
+	exports.default = Card;
 
 /***/ }
 /******/ ]);
