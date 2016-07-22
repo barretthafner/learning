@@ -71,12 +71,12 @@ class What extends React.Component {
   }
 };
 
-class Nav extends React.Component {
-  render() {
-    return (
-
-    )
-  }
-}
+//class Nav extends React.Component {
+//  render() {
+//    return (
+//
+//    )
+//  }
+//}
 
 ReactDOM.render(<Main />, document.getElementById('container'));

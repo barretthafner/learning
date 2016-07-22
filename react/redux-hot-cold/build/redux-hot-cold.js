@@ -108,75 +108,7 @@
 	              )
 	            )
 	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'overlay', id: 'modal' },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'content' },
-	              _react2.default.createElement(
-	                'h3',
-	                null,
-	                'What do I do?'
-	              ),
-	              _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(
-	                  'p',
-	                  null,
-	                  'This is a Hot or Cold Number Guessing Game. The game goes like this: '
-	                ),
-	                _react2.default.createElement(
-	                  'ul',
-	                  null,
-	                  _react2.default.createElement(
-	                    'li',
-	                    null,
-	                    '1. I pick a ',
-	                    _react2.default.createElement(
-	                      'strong',
-	                      null,
-	                      'random secret number'
-	                    ),
-	                    ' between 1 to 100 and keep it hidden.'
-	                  ),
-	                  _react2.default.createElement(
-	                    'li',
-	                    null,
-	                    '2. You need to ',
-	                    _react2.default.createElement(
-	                      'strong',
-	                      null,
-	                      'guess'
-	                    ),
-	                    ' until you can find the hidden secret number.'
-	                  ),
-	                  _react2.default.createElement(
-	                    'li',
-	                    null,
-	                    '3. You will ',
-	                    _react2.default.createElement(
-	                      'strong',
-	                      null,
-	                      'get feedback'
-	                    ),
-	                    ' on how close ("hot") or far ("cold") your guess is.'
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'p',
-	                  null,
-	                  'So, Are you ready?'
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { className: 'close', href: '#' },
-	                  'Got It!'
-	                )
-	              )
-	            )
-	          ),
+	          _react2.default.createElement(What, null),
 	          _react2.default.createElement(
 	            'h1',
 	            null,
@@ -216,6 +148,105 @@
 	
 	  return Main;
 	}(_react2.default.Component);
+	
+	;
+	
+	var What = function (_React$Component2) {
+	  _inherits(What, _React$Component2);
+	
+	  function What(props) {
+	    _classCallCheck(this, What);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(What).call(this, props));
+	  }
+	
+	  _createClass(What, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'overlay', id: 'modal' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'content' },
+	          _react2.default.createElement(
+	            'h3',
+	            null,
+	            'What do I do?'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              'This is a Hot or Cold Number Guessing Game. The game goes like this: '
+	            ),
+	            _react2.default.createElement(
+	              'ul',
+	              null,
+	              _react2.default.createElement(
+	                'li',
+	                null,
+	                '1. I pick a ',
+	                _react2.default.createElement(
+	                  'strong',
+	                  null,
+	                  'random secret number'
+	                ),
+	                ' between 1 to 100 and keep it hidden.'
+	              ),
+	              _react2.default.createElement(
+	                'li',
+	                null,
+	                '2. You need to ',
+	                _react2.default.createElement(
+	                  'strong',
+	                  null,
+	                  'guess'
+	                ),
+	                ' until you can find the hidden secret number.'
+	              ),
+	              _react2.default.createElement(
+	                'li',
+	                null,
+	                '3. You will ',
+	                _react2.default.createElement(
+	                  'strong',
+	                  null,
+	                  'get feedback'
+	                ),
+	                ' on how close ("hot") or far ("cold") your guess is.'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              'So, Are you ready?'
+	            ),
+	            _react2.default.createElement(
+	              'a',
+	              { className: 'close', href: '#' },
+	              'Got It!'
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return What;
+	}(_react2.default.Component);
+	
+	;
+	
+	//class Nav extends React.Component {
+	//  render() {
+	//    return (
+	//
+	//    )
+	//  }
+	//}
 	
 	_reactDom2.default.render(_react2.default.createElement(Main, null), document.getElementById('container'));
 
