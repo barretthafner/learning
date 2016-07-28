@@ -21201,7 +21201,7 @@
 	  },
 	  onAddKeyPress: function onAddKeyPress(event) {
 	    var keyCode = event.which;
-	    if (keyCode === 13) {
+	    if (keyCode === 13 && this.state.text !== "") {
 	      this.addCard();
 	    }
 	  },
