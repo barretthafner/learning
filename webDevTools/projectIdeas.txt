@@ -1,3 +1,0 @@
-HTML color name guessing game
-
-Election helper
