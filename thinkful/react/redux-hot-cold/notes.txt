@@ -1,0 +1,14 @@
+state:
+  whatModal: boolean
+  guesses: array
+  correctNumber: number 1-100
+  currentFeedback: string
+
+
+Main
+  Rules
+    props: showRules
+  Feedback
+  GuessForm
+  GuessList
+  NewGame

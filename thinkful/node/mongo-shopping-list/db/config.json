@@ -1,0 +1,11 @@
+{
+    "production": {
+        "url": "mongodb://thinkful-shopping-list:DimH3%y3D97p^tR@ds021694.mlab.com:21694/thinkful-shopping-list"
+    },
+    "test": {
+        "url": "mongodb://localhost/shopping-list-test"
+    },
+    "development": {
+        "url": "mongodb://localhost/shopping-list-dev"
+    }
+}

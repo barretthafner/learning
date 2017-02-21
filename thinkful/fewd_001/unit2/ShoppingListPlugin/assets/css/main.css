@@ -1,0 +1,133 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+a, a:visited, a:hover, a:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+
+body {
+  font-family: Roboto;
+  -webkit-font-smoothing: antialiased;
+  background: #3D7EAA; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #3D7EAA , #FFE47A); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #3D7EAA , #FFE47A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+#container {
+  width: 30rem;
+  margin: 5rem auto;
+  box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.1)
+}
+
+#heading {
+  margin: 0;
+  padding: 0;
+  background: #2980b9;
+  color: #fff;
+  display: flex;
+}
+
+#heading h1 {
+  height: 100%;
+  display: inline-flex;
+  width: 80%;
+  text-transform: uppercase;
+  font-size: 1.6rem;
+  font-weight: 400;
+  margin: 0.7rem 1.5rem;
+
+}
+
+#hide {
+  width: 20%;
+  display: inline-flex;
+  font-size: 2em;
+  margin: auto;
+  padding: 0 2rem;
+}
+
+#hide:hover {
+  cursor: pointer;
+}
+
+input {
+  font: 20px;
+  color: #2980b9;
+  background-color: #f7f7f7;
+  width: 100%;
+  padding: 13px 13px 13px 20px;
+  box-sizing: border-box;
+  border: 3px solid rgba(0, 0, 0, 0);
+
+}
+
+input:focus {
+  background: #fff;
+  border: 3px solid #2980b9;
+  outline: none;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  background: #fff;
+  height: 40px;
+  line-height: 40px;
+  color: #666;
+  padding-left: 1rem;
+}
+
+li:nth-child(2n) {
+  background: #f7f7f7
+}
+
+li:hover span {
+  width: 40px;
+  opacity: 1;
+}
+
+span {
+  background: #e74e3c;
+  height: 40px;
+  width: 0px;
+  text-align: center;
+  color: #fff;
+  display: inline-block;
+  transition: 0.2s linear;
+  opacity: 0;
+  float: right;
+}
+
+.done {
+  color: gray;
+  text-decoration: line-through;
+}
+
+.grabbable {
+    cursor: move; /* fallback if grab cursor is unsupported */
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+}
+
+ /* (Optional) Apply a "closed-hand" cursor during drag operation. */
+.grabbable:active {
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+}

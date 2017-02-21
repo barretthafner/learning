@@ -1,0 +1,201 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: Roboto;
+  -webkit-font-smoothing: antialiased;
+}
+
+/*
+div {
+  border: 5px solid Chocolate;
+}
+*/
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+.content {
+  padding: 0 0.938rem;
+  margin: 0 auto;
+  min-width: 37.5rem;
+  width: 60%;
+}
+
+/* Navigation Section */
+.top-navigation {
+  background-color: #fff;
+  position: fixed;
+  width: 100%;
+  z-index: 9999;
+}
+
+.top-navigation > .content {
+  width: 970px;
+  height: 70px;
+}
+
+.top-navigation .logo {
+  margin: 13px 0 0 0;
+}
+
+.top-navigation .links {
+  float: right;
+  margin-top: 25px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  color: #838994;
+  letter-spacing: 0.03em;
+}
+
+
+.top-navigation .links li {
+  display: inline-block;
+  margin-left: 25px;
+}
+
+.top-navigation .links > .active {
+  color: #4c5058;
+  font-weight: 500;
+}
+
+.links li:hover {
+  color: #4c5058;
+  cursor: pointer;
+}
+
+.introduction {
+  background-image: url('/img/first-background.jpg');
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: auto;
+  height: 45.938rem;
+}
+
+.introduction h1, .introduction h3 {
+  color: white;
+  text-align: center;
+  font-weight: 300;
+}
+
+.introduction h1 {
+  margin-top: 17.5rem;
+  font-size: 3.125rem;
+}
+
+.introduction h3 {
+  margin-top: 1.25rem;
+  font-size: 1.563rem;
+}
+
+.introduction .buttons {
+    text-align: center;
+    margin-top: 1.563rem;
+}
+
+button {
+  width: 10rem;
+  background-color: #f15a29;
+  border-color: #f15a29;
+  text-shadow: none;
+  border-style: none;
+  border-radius: 4px;
+  padding: 1rem 1.5rem;
+  color: white;
+  font-size: 1.125rem;
+}
+
+button:hover {
+  background-color: #d9400e;
+  border-color: #cf3d0e;
+  cursor: pointer;
+}
+
+.cases {
+  background-color: #fff;
+  overflow: hidden;
+  padding-bottom: 5rem;
+}
+
+.cases .content {
+  margin-top: 7.875rem;
+  color: #1d1e21;
+  text-align: center;
+}
+
+.cases h2 {
+  font-size: 2.75rem;
+  margin: 1.625rem 0 3.125rem;
+  font-weight: 300;
+}
+
+.cases .devices h3 {
+    font-weight: 400;
+    font-size: 1.563rem;
+    margin: 2.5rem 0px 1.875rem;
+}
+
+.cases .devices > li {
+  width: 33.3333333%;
+  float: left;
+}
+
+.social {
+    background-color: #fff;
+    overflow: auto;
+    padding-bottom: 9.375rem;
+    text-align: center;
+}
+
+.social hr {
+    border: 0;
+    border-top: 1px solid #eaebec;
+    margin: 1.5rem;
+}
+
+.social h5 {
+  font: inherit;
+  font-size: 100%;
+  margin: 0;
+}
+
+.social .icons {
+  padding: 0;
+  margin: 1.5rem 0;
+}
+
+.social .icons > li {
+    display: inline-block;
+    text-align: center;
+    margin: 0 0.5rem;
+}
+
+.twitter {
+  color: #55acee;
+}
+
+.facebook {
+  color: #4c66a4;
+}
+
+.instagram {
+ color: #3f729b;
+}
+
+.social .copy {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: #838994;
+}

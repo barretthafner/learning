@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contacts App</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="main.css">
+  </head>
+  <body>
+
+    <header>
+      <h1>Contacts</h1>
+    </header>
+
+    <section class="col-md-7">
+      <h2>Add a contact</h2>
+      <form class="contact-form">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input type="text" class="form-control" id="firstName" placeholder="First Name" required>
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input type="text" class="form-control" id="lastName" placeholder="Last Name" required>
+        </div>
+        <div class="form-group">
+          <label for="phoneNumber">Phone Number</label>
+          <input type="text" class="form-control" id="phoneNumber" placeholder="Phone Number">
+        </div>
+        <div class="form-group">
+          <label for="addressStreet">Street</label>
+          <input type="text" class="form-control" id="addressStreet" placeholder="Street">
+        </div>
+        <div class="form-group">
+          <label for="addressCity">City</label>
+          <input type="text" class="form-control" id="addressCity" placeholder="City">
+        </div>
+        <div class="form-group">
+          <label for="addressState">State</label>
+          <input type="text" class="form-control" id="addressState" placeholder="State">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </section>
+
+    <section class='col-md-4'>
+      <div>
+       <h3>Contact Info</h3>
+       <div class="contact-display">
+          <!--    Contact Info goes here    -->
+          <p>First Name: <span class='first-name'></span></p>
+          <p>Last Name: <span class='last-name'></span></p>
+          <ul class='phone-number'></ul>
+          <ul class='addresses'></ul>
+       </div>
+      </div>
+    </section>
+
+    <section class="col-md-12">
+      <div>
+        <h3>Contacts:</h3>
+        <ul class="contact-list">
+          <!--    Contact List goes here    -->
+        </ul>
+      </div>
+    </section>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="contacts.js"></script>
+  </body>
+</html>

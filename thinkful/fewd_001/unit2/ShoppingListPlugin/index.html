@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shopping Lister</title>
+  <link href="assets/css/normalize.css" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700' rel='stylesheet' type='text/css'>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"  rel="stylesheet" type='text/css'>
+  <link href="assets/css/main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <div id="container">
+
+    <div class="shopping-list">
+      <!-- HTML coming soon -->
+    </div>
+
+    <div class="todo-list">
+      <!-- HTML coming soon -->
+    </div>
+
+  </div>
+
+  <script id="list-template" type="text/template">
+    <div id="heading">
+      <h1 class="title">List</h1>
+      <div id="hide" class="toggle-button">
+        <i class="fa fa-plus"></i>
+      </div>
+    </div>
+    <input id="listInput" type="text" placeholder="Add New Item" class="list-input">
+    <ul class="list-items">
+
+    </ul>
+  </script>
+  <script id="list-template-todo" type="text/template">
+    <div id="heading">
+      <h1 class="title">List</h1>
+      <div id="hide" class="toggle-button">
+        <i class="fa fa-plus"></i>
+      </div>
+    </div>
+    <input id="listInput" type="text" placeholder="Add New Item" class="list-input">
+    <ul class="list-items">
+
+    </ul>
+  </script>
+
+  <script type="text/javascript" src="assets/js/lib/jquery-2.2.0.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+
+  <script type="text/javascript" src="assets/js/todos.js"></script>
+</body>
+</html>

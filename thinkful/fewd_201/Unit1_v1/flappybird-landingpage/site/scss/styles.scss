@@ -1,0 +1,50 @@
+@import "normalize";
+@import "bourbon";
+@import "neat";
+
+$color
+
+body {
+  text-align:center;
+  font-family: 'Roboto', $helvetica;
+  color:black;
+  background-color: #d5d5d5;
+
+}
+
+.container {
+    width: 90%;
+}
+
+header {
+  font-size: 2em;
+  letter-spacing: .1em;
+  word-spacing: .5em;
+  text-transform: uppercase;
+}
+
+.screenshots{
+  .card {
+    border: ;
+    img {
+      width: 100%;
+    }
+  }
+
+}
+.socials {
+  font-size: 3em;
+
+  a, a:visited, a:hover, a:active {
+    color: slategray;
+    padding: 1em;
+  }
+}
+
+.button {
+  @include button;
+<<<<<<< HEAD
+}
+=======
+}
+>>>>>>> origin/gh-pages
